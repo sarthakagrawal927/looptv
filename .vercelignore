@@ -1,0 +1,4 @@
+data/
+scripts/
+*.jsonl
+requirements-ner.txt
