@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LoopTV
 
-## Getting Started
+TV-like app that plays random YouTube videos from curated channels, nonstop. Pick a channel, hit play, and lean back.
 
-First, run the development server:
+**Zero API keys needed.** Uses yt-dlp for catalog building and YouTube's free IFrame Player for playback. HuggingFace NER auto-tags videos with people, places, and topics — no hardcoded lists.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Channels
+
+Each LoopTV channel can combine multiple YouTube channels into one stream. Categories are auto-derived from video metadata using NER.
+
+| Channel | Sources | Videos |
+|---------|---------|--------|
+| Saturday Night Live | @SaturdayNightLive | ~8,900 |
+| Science | @kurzgesagt + @TEDEd | ~2,500 |
+
+## Add a Channel
+
+Edit `stations.json`:
+
+```json
+{
+  "id": "comedy",
+  "name": "Comedy",
+  "description": "Stand-up and sketches",
+  "sources": [
+    { "name": "Comedy Central", "handle": "@ComedyCentral", "minDuration": 60, "maxDuration": 1800 }
+  ]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then rebuild:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bash scripts/build-catalog.sh
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+NER tagging runs automatically in GitHub Actions weekly, or manually:
 
-## Learn More
+```bash
+pip install -r requirements-ner.txt
+python3 scripts/extract-tags.py
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm install
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Build Catalog
 
-## Deploy on Vercel
+Requires [yt-dlp](https://github.com/yt-dlp/yt-dlp):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+brew install yt-dlp    # or pip install yt-dlp
+bash scripts/build-catalog.sh
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How It Works
+
+```
+stations.json          ← Add YouTube channels here
+     ↓
+build-catalog.sh       ← yt-dlp fetches video metadata (titles, descriptions, durations)
+     ↓
+process-catalog.mjs    ← Merges with existing catalog, preserves NER tags for known videos
+     ↓
+extract-tags.py        ← HuggingFace NER (dslim/bert-base-NER) extracts people, places
+     ↓                    Auto-derives categories from most frequent tags
+catalog.json           ← Committed to repo, served as static JSON
+     ↓
+Next.js frontend       ← Picks random videos, plays via YouTube IFrame API
+```
+
+## Controls
+
+| Key | Action |
+|-----|--------|
+| Space | Play / Pause |
+| N / Right | Next random video |
+| P / Left | Previous video |
+| M | Mute / Unmute |
+| / | Search |
+| F | Fullscreen |
+| Esc | Close search |
+
+## GitHub Actions
+
+The catalog updates weekly via GitHub Actions (`.github/workflows/update-catalog.yml`). It fetches new videos, runs NER only on new additions, and commits the updated catalog.
+
+## Stack
+
+- Next.js 16 + Tailwind CSS v4
+- YouTube IFrame Player API (free, no key)
+- yt-dlp (free, no key)
+- HuggingFace Transformers (dslim/bert-base-NER)
+
+## License
+
+MIT

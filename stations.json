@@ -1,0 +1,179 @@
+[
+  {
+    "id": "snl",
+    "name": "Saturday Night Live",
+    "description": "Sketches, Weekend Update, cold opens, and more",
+    "sources": [
+      { "name": "Saturday Night Live", "handle": "@SaturdayNightLive", "minDuration": 60, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "science",
+    "name": "Science",
+    "description": "Kurzgesagt, TED-Ed, Veritasium, SmarterEveryDay, and more",
+    "sources": [
+      { "name": "Kurzgesagt", "handle": "@kurzgesagt", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "TED-Ed", "handle": "@TEDEd", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Veritasium", "handle": "@veritasium", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Be Smart", "handle": "@besmart", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Science Channel", "handle": "@sciencechannel", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "minutephysics", "handle": "@MinutePhysics", "minDuration": 60, "maxDuration": 900 },
+      { "name": "Physics Girl", "handle": "@physicsgirl", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "engineerguy", "handle": "@engineerguyvideo", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Quanta Magazine", "handle": "@QuantaScienceChannel", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "This.", "handle": "@this.science", "minDuration": 60, "maxDuration": 1200 },
+      { "name": "SmarterEveryDay", "handle": "@SmarterEveryDay", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Steve Mould", "handle": "@SteveMould", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "ElectroBOOM", "handle": "@ElectroBOOM", "minDuration": 120, "maxDuration": 1200 }
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "Tech",
+    "description": "Fireship, ColdFusion, NetworkChuck, and more",
+    "sources": [
+      { "name": "Fireship", "handle": "@Fireship", "minDuration": 30, "maxDuration": 1800 },
+      { "name": "Beyond Fireship", "handle": "@beyondfireship", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "NetworkChuck", "handle": "@NetworkChuck", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "ColdFusion", "handle": "@ColdFusion", "minDuration": 300, "maxDuration": 3600 },
+      { "name": "Tech Tangents", "handle": "@TechTangents", "minDuration": 120, "maxDuration": 2400 },
+      { "name": "KRAZAM", "handle": "@KRAZAM", "minDuration": 30, "maxDuration": 600 },
+      { "name": "Low Level", "handle": "@LowLevelTV", "minDuration": 60, "maxDuration": 1200 }
+    ]
+  },
+  {
+    "id": "comedy",
+    "name": "Comedy",
+    "description": "The Onion, CalebCity, Ryan George, ProZD, and more",
+    "sources": [
+      { "name": "The Onion", "handle": "@TheOnion", "minDuration": 30, "maxDuration": 600 },
+      { "name": "Studio C", "handle": "@StudioCtv", "minDuration": 60, "maxDuration": 900 },
+      { "name": "HISHE", "handle": "@HowItShouldHaveEnded", "minDuration": 60, "maxDuration": 900 },
+      { "name": "I Mostly Blame Myself", "handle": "@IMostlyBlameMyself", "minDuration": 30, "maxDuration": 600 },
+      { "name": "BroScienceLife", "handle": "@BroScienceLife", "minDuration": 60, "maxDuration": 600 },
+      { "name": "Worthikids", "handle": "@Worthikids", "minDuration": 30, "maxDuration": 600 },
+      { "name": "RackaRacka", "handle": "@Therackaracka", "minDuration": 60, "maxDuration": 900 },
+      { "name": "CalebCity", "handle": "@CalebCity", "minDuration": 30, "maxDuration": 600 },
+      { "name": "ProZD", "handle": "@ProZD", "minDuration": 30, "maxDuration": 600 },
+      { "name": "Ryan George", "handle": "@RyanGeorge", "minDuration": 60, "maxDuration": 600 }
+    ]
+  },
+  {
+    "id": "cs",
+    "name": "CS Deep Dive",
+    "description": "Computerphile, Coding Train, ByteByteGo, and more",
+    "sources": [
+      { "name": "Computerphile", "handle": "@Computerphile", "minDuration": 120, "maxDuration": 2400 },
+      { "name": "The Coding Train", "handle": "@TheCodingTrain", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Hussein Nasser", "handle": "@hnasr", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "ByteByteGo", "handle": "@ByteByteGo", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "William Fiset", "handle": "@WilliamFiset-videos", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Michael Sambol", "handle": "@MichaelSambol", "minDuration": 30, "maxDuration": 600 },
+      { "name": "Spanning Tree", "handle": "@SpanningTree", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Defog Tech", "handle": "@DefogTech", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Arpit Bhayani", "handle": "@AsliEngineering", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "StatQuest", "handle": "@statquest", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "TechWorld with Nana", "handle": "@TechWorldwithNana", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Steve (Builder.io)", "handle": "@Steve8708", "minDuration": 60, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "ai",
+    "name": "AI / ML",
+    "description": "Karpathy, Yannic Kilcher, Two Minute Papers, and more",
+    "sources": [
+      { "name": "Andrej Karpathy", "handle": "@AndrejKarpathy", "minDuration": 120, "maxDuration": 7200 },
+      { "name": "Two Minute Papers", "handle": "@TwoMinutePapers", "minDuration": 60, "maxDuration": 900 },
+      { "name": "Yannic Kilcher", "handle": "@YannicKilcher", "minDuration": 300, "maxDuration": 7200 },
+      { "name": "bycloud", "handle": "@bycloudAI", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Animated AI", "handle": "@animatedai", "minDuration": 30, "maxDuration": 600 },
+      { "name": "AI Engineer", "handle": "@aiDotEngineer", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Lossfunk", "handle": "@Lossfunk", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Simon Oz", "handle": "@szymonozog7862", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "Yifan", "handle": "@YifanBTH", "minDuration": 60, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "startups",
+    "name": "Startups",
+    "description": "Y Combinator, Garry Tan, Startup Archive, and more",
+    "sources": [
+      { "name": "Y Combinator", "handle": "@ycombinator", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "YC Root Access", "handle": "@ycrootaccess", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "Garry Tan", "handle": "@GarryTan", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "Startup Archive", "handle": "@startuparchive_", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "EO", "handle": "@eoglobal", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Honestly by Tanmay Bhat", "handle": "@HonestlybyTanmayBhat", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Sahil Bloom", "handle": "@Sahil_Bloom", "minDuration": 60, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Finance",
+    "description": "Wall Street Millennial, The Plain Bagel, Jane Street, and more",
+    "sources": [
+      { "name": "Wall Street Millennial", "handle": "@wallstreetmillennial", "minDuration": 120, "maxDuration": 2400 },
+      { "name": "Quant Prof", "handle": "@Quant_Prof", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Jane Street", "handle": "@janestreet", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "The Plain Bagel", "handle": "@ThePlainBagel", "minDuration": 120, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "mindset",
+    "name": "Self-Improvement",
+    "description": "Huberman, Charisma on Command, and more",
+    "sources": [
+      { "name": "Improvement Pill", "handle": "@ImprovementPill", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Charisma on Command", "handle": "@Charismaoncommand", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Mark Manson", "handle": "@IAmMarkManson", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "PsycHacks", "handle": "@psychacks", "minDuration": 120, "maxDuration": 900 },
+      { "name": "Freedom in Thought", "handle": "@FreedominThought", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Bryan Johnson", "handle": "@BryanJohnson", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Huberman Lab Clips", "handle": "@HubermanLabClips", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Sprouts", "handle": "@sprouts", "minDuration": 120, "maxDuration": 900 }
+    ]
+  },
+  {
+    "id": "math",
+    "name": "Math",
+    "description": "3Blue1Brown, Numberphile, CGP Grey, and more",
+    "sources": [
+      { "name": "3Blue1Brown", "handle": "@3blue1brown", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Numberphile", "handle": "@Numberphile", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "standupmaths", "handle": "@standupmaths", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "2swap", "handle": "@twoswap", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "PBS Infinite Series", "handle": "@pbsinfiniteseries", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Primer", "handle": "@PrimerBlobs", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "CGP Grey", "handle": "@CGPGrey", "minDuration": 120, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "Fitness",
+    "description": "FitnessFAQs, Tom Merrick, Jeff Nippard",
+    "sources": [
+      { "name": "FitnessFAQs", "handle": "@FitnessFAQs", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Tom Merrick", "handle": "@BodyweightWarrior", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Jeff Nippard", "handle": "@JeffNippard", "minDuration": 120, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "talks",
+    "name": "TED Talks",
+    "description": "The best TED talks",
+    "sources": [
+      { "name": "TED", "handle": "@TED", "minDuration": 300, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "film",
+    "name": "Film & Video Essays",
+    "description": "Nerdwriter, Every Frame a Painting, RocketJump, NITV Shorts",
+    "sources": [
+      { "name": "Nerdwriter", "handle": "@Nerdwriter1", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Every Frame a Painting", "handle": "@EveryFrameAPainting", "minDuration": 120, "maxDuration": 900 },
+      { "name": "RocketJump Film School", "handle": "@RJFilmSchool", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "NITV Shorts", "handle": "@NITVShorts", "minDuration": 60, "maxDuration": 1800 }
+    ]
+  }
+]
