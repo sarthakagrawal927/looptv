@@ -164,12 +164,12 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   // ── Landing: channel picker ──
   if (mode === "landing") {
     return (
-      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen bg-black flex flex-col items-center px-6 py-16 overflow-y-auto">
         <div className="text-center mb-10">
           <h1 className="text-white text-5xl font-bold tracking-tight mb-2">LoopTV</h1>
           <p className="text-white/40 text-base">Pick a channel. Random clips play nonstop.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
           {stations.map((st) => {
             const count = catalog?.stations?.[st.id]?.videos?.length ?? 0;
             return (
