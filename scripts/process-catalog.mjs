@@ -54,8 +54,7 @@ for (const station of stationsConfig) {
         const dur = raw.duration || 0;
         if (dur < minDur || dur > maxDur) continue;
 
-        // Quality filters: minimum 2 min, minimum 10K views
-        if (dur < 120) continue;
+        // Quality filter: minimum 10K views
         if ((raw.view_count || 0) < 10000) continue;
 
         const prev = existingVideos.get(raw.id);

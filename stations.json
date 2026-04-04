@@ -52,7 +52,6 @@
       { "name": "I Mostly Blame Myself", "handle": "@IMostlyBlameMyself", "minDuration": 30, "maxDuration": 600 },
       { "name": "BroScienceLife", "handle": "@BroScienceLife", "minDuration": 60, "maxDuration": 600 },
       { "name": "Worthikids", "handle": "@Worthikids", "minDuration": 30, "maxDuration": 600 },
-      { "name": "RackaRacka", "handle": "@Therackaracka", "minDuration": 60, "maxDuration": 900 },
       { "name": "CalebCity", "handle": "@CalebCity", "minDuration": 30, "maxDuration": 600 },
       { "name": "ProZD", "handle": "@ProZD", "minDuration": 30, "maxDuration": 600 },
       { "name": "Ryan George", "handle": "@RyanGeorge", "minDuration": 60, "maxDuration": 600 }
@@ -88,7 +87,6 @@
       { "name": "bycloud", "handle": "@bycloudAI", "minDuration": 120, "maxDuration": 1800 },
       { "name": "Animated AI", "handle": "@animatedai", "minDuration": 30, "maxDuration": 600 },
       { "name": "AI Engineer", "handle": "@aiDotEngineer", "minDuration": 120, "maxDuration": 3600 },
-      { "name": "Lossfunk", "handle": "@Lossfunk", "minDuration": 120, "maxDuration": 3600 },
       { "name": "Simon Oz", "handle": "@szymonozog7862", "minDuration": 60, "maxDuration": 1800 },
       { "name": "Yifan", "handle": "@YifanBTH", "minDuration": 60, "maxDuration": 1800 }
     ]
@@ -126,7 +124,6 @@
       { "name": "Improvement Pill", "handle": "@ImprovementPill", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Charisma on Command", "handle": "@Charismaoncommand", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Mark Manson", "handle": "@IAmMarkManson", "minDuration": 120, "maxDuration": 1800 },
-      { "name": "PsycHacks", "handle": "@psychacks", "minDuration": 120, "maxDuration": 900 },
       { "name": "Freedom in Thought", "handle": "@FreedominThought", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Bryan Johnson", "handle": "@BryanJohnson", "minDuration": 120, "maxDuration": 1800 },
       { "name": "Huberman Lab Clips", "handle": "@HubermanLabClips", "minDuration": 120, "maxDuration": 1800 },
