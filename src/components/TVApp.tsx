@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import type { Catalog, Video } from "@/lib/types";
 import { loadCatalog, getVideosForStation, pickRandom, formatDuration } from "@/lib/catalog";
+import { getWatchedIds, markWatched, getStats } from "@/lib/watched";
 import Link from "next/link";
 import Player, { type PlayerHandle } from "./Player";
 import Search from "./Search";
@@ -18,6 +19,8 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [hideWatched, setHideWatched] = useState(true);
+  const [watchedIds, setWatchedIds] = useState<Set<string>>(new Set());
   const skippedRef = useRef(new Set<string>());
   const historyRef = useRef<Video[]>([]);
   const playerRef = useRef<PlayerHandle>(null);
@@ -39,30 +42,54 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
     ];
   }, [catalog, activeStation]);
 
+  // Load watched state from localStorage
+  useEffect(() => {
+    setWatchedIds(getWatchedIds());
+  }, []);
+
   useEffect(() => {
     loadCatalog()
       .then((c) => { setCatalog(c); setStatus(""); })
       .catch(() => setStatus("No catalog found. Run: pnpm run build:catalog"));
   }, []);
 
+  // Track video as watched when it starts playing
+  useEffect(() => {
+    if (currentVideo && mode === "playing") {
+      markWatched(currentVideo.id, currentVideo.duration, activeStation, currentVideo.source || "");
+      setWatchedIds((prev) => new Set([...prev, currentVideo.id]));
+    }
+  }, [currentVideo, mode, activeStation]);
+
   const playNext = useCallback(
     (cat?: string) => {
       if (!catalog) return;
       const videos = getVideosForStation(catalog, activeStation, cat || activeCategory);
-      const available = videos.filter((v) => !skippedRef.current.has(v.id));
-      if (available.length < 5) skippedRef.current.clear();
+      // Filter out watched if enabled, plus skipped (embed errors)
+      const available = videos.filter(
+        (v) => !skippedRef.current.has(v.id) && (!hideWatched || !watchedIds.has(v.id))
+      );
 
-      const next = pickRandom(available.length > 0 ? available : videos, currentVideo?.id);
+      if (available.length < 5) {
+        // If hiding watched and we've seen almost everything, reset
+        if (hideWatched && available.length < 5 && videos.length > 5) {
+          setStatus(`Almost all watched! ${available.length} left`);
+        }
+        skippedRef.current.clear();
+      }
+
+      const pool = available.length > 0 ? available : videos;
+      const next = pickRandom(pool, currentVideo?.id);
       if (next) {
         if (currentVideo) historyRef.current.push(currentVideo);
         setCurrentVideo(next);
         setStatus("");
         setPaused(false);
       } else {
-        setStatus("No videos in this category");
+        setStatus("No unwatched videos in this category");
       }
     },
-    [catalog, activeStation, activeCategory, currentVideo]
+    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds]
   );
 
   const playPrev = useCallback(() => {
@@ -88,7 +115,8 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       skippedRef.current.clear();
       if (catalog) {
         const videos = getVideosForStation(catalog, activeStation, id);
-        const next = pickRandom(videos);
+        const available = hideWatched ? videos.filter((v) => !watchedIds.has(v.id)) : videos;
+        const next = pickRandom(available.length > 0 ? available : videos);
         if (next) {
           if (currentVideo) historyRef.current.push(currentVideo);
           setCurrentVideo(next);
@@ -97,7 +125,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         }
       }
     },
-    [catalog, activeStation, currentVideo]
+    [catalog, activeStation, currentVideo, hideWatched, watchedIds]
   );
 
   const startPlaying = useCallback(() => {
@@ -109,17 +137,15 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
     if (mode === "playing" && catalog && !currentVideo) playNext();
   }, [mode, catalog, currentVideo, playNext]);
 
-  // Keyboard shortcuts — mode-aware
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
-      // Global shortcuts
       if (e.key === "/") { e.preventDefault(); setSearchOpen(true); return; }
       if (e.key === "Escape") { e.preventDefault(); setSearchOpen(false); return; }
       if (searchOpen) return;
 
-      // Lobby: Space and N start playing
       if (mode === "lobby") {
         if (e.key === " " || e.key.toLowerCase() === "n") {
           e.preventDefault();
@@ -128,7 +154,6 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         return;
       }
 
-      // Playing mode shortcuts
       if (mode !== "playing") return;
       switch (e.key.toLowerCase()) {
         case " ": e.preventDefault(); playerRef.current?.togglePlay(); setPaused((p) => !p); break;
@@ -136,6 +161,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         case "p": case "arrowleft": e.preventDefault(); playPrev(); break;
         case "m": e.preventDefault(); playerRef.current?.toggleMute(); setMuted((m) => !m); break;
         case "f": e.preventDefault(); document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); break;
+        case "w": e.preventDefault(); setHideWatched((h) => !h); break;
         default: {
           const n = parseInt(e.key);
           if (n >= 1 && n <= Math.min(categories.length, 9)) {
@@ -160,18 +186,30 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
 
   const allVideos = catalog?.stations?.[activeStation]?.videos ?? [];
   const catalogLoaded = catalog !== null;
+  const unwatchedCount = allVideos.filter((v) => !watchedIds.has(v.id)).length;
 
-  // ── Landing: channel picker ──
+  // ── Landing: channel picker with stats ──
   if (mode === "landing") {
+    const stats = getStats();
+    const totalHours = Math.floor(stats.totalSeconds / 3600);
+    const totalMins = Math.floor((stats.totalSeconds % 3600) / 60);
+
     return (
       <div className="min-h-screen bg-black flex flex-col items-center px-6 py-16 overflow-y-auto">
         <div className="text-center mb-10">
           <h1 className="text-white text-5xl font-bold tracking-tight mb-2">LoopTV</h1>
           <p className="text-white/40 text-base">Pick a channel. Random clips play nonstop.</p>
+          {stats.totalWatched > 0 && (
+            <p className="text-white/20 text-sm mt-3">
+              {stats.totalWatched.toLocaleString()} watched
+              {totalHours > 0 ? ` \u00b7 ${totalHours}h ${totalMins}m` : totalMins > 0 ? ` \u00b7 ${totalMins}m` : ""}
+            </p>
+          )}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
           {stations.map((st) => {
             const count = catalog?.stations?.[st.id]?.videos?.length ?? 0;
+            const stWatched = stats.byStation[st.id] || 0;
             return (
               <Link
                 key={st.id}
@@ -180,10 +218,14 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
               >
                 <h2 className="text-white text-lg font-semibold">{st.name}</h2>
                 <p className="text-white/40 text-sm mt-1">{st.description}</p>
-                <p className="text-white/30 text-xs mt-2">
-                  {count ? `${count.toLocaleString()} videos` : catalogLoaded ? "No videos" : "Loading..."}
-                  {st.sources.length > 1 && ` \u00b7 ${st.sources.map((s) => s.name).join(" + ")}`}
-                </p>
+                <div className="flex items-center gap-2 mt-2">
+                  <p className="text-white/30 text-xs">
+                    {count ? `${count.toLocaleString()} videos` : catalogLoaded ? "No videos" : "Loading..."}
+                  </p>
+                  {stWatched > 0 && (
+                    <p className="text-white/20 text-xs">\u00b7 {stWatched} watched</p>
+                  )}
+                </div>
               </Link>
             );
           })}
@@ -192,8 +234,11 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
     );
   }
 
-  // ── Lobby: channel selected, show play + search ──
+  // ── Lobby: channel selected ──
   if (mode === "lobby") {
+    const stats = getStats();
+    const stWatched = stats.byStation[activeStation] || 0;
+
     return (
       <div className="fixed inset-0 bg-black flex flex-col items-center justify-center px-6">
         <Link href="/" className="absolute top-6 left-6 text-white/30 hover:text-white/60 transition-colors text-sm flex items-center gap-1.5">
@@ -205,8 +250,11 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
           <h1 className="text-white text-4xl font-bold tracking-tight mb-1">{config.name}</h1>
           <p className="text-white/40 text-sm">
             {config.sources.length > 1 && config.sources.map((s) => s.name).join(" + ") + " \u00b7 "}
-            {allVideos.length > 0 ? `${allVideos.length.toLocaleString()} videos` : catalogLoaded ? "No videos" : "Loading..."}
+            {allVideos.length > 0 ? `${unwatchedCount.toLocaleString()} unwatched of ${allVideos.length.toLocaleString()}` : catalogLoaded ? "No videos" : "Loading..."}
           </p>
+          {stWatched > 0 && (
+            <p className="text-white/20 text-xs mt-1">{stWatched} videos watched in this channel</p>
+          )}
         </div>
 
         {categories.length > 1 && (
@@ -301,6 +349,21 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
           </div>
 
           <div className="flex items-center gap-1 shrink-0">
+            {/* Hide watched toggle */}
+            <button
+              onClick={() => setHideWatched((h) => !h)}
+              className={`p-2 rounded-lg transition-colors ${hideWatched ? "text-green-400 hover:bg-white/10" : "text-white/30 hover:text-white/60 hover:bg-white/10"}`}
+              title={`${hideWatched ? "Showing unwatched only" : "Showing all"} (W)`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {hideWatched ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                )}
+              </svg>
+            </button>
+
             <button onClick={() => setSearchOpen(true)} className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors" title="Search (/)">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </button>
