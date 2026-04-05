@@ -13,6 +13,7 @@ export interface YouTubeSource {
   handle: string; // @handle for yt-dlp
   minDuration?: number;
   maxDuration?: number;
+  topPercentile?: number; // keep only top N% by views (e.g., 25 = top 25%)
 }
 
 export interface StationConfig {

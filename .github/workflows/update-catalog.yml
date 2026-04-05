@@ -11,7 +11,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -20,35 +20,18 @@ jobs:
         with:
           node-version: "22"
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      # Cache Python deps (transformers + torch are large)
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-ner-${{ hashFiles('requirements-ner.txt') }}
-          restore-keys: pip-ner-
-
-      # Cache HuggingFace model
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: hf-bert-base-ner
-
       - name: Install dependencies
         run: |
-          pip install -q yt-dlp transformers torch
+          pip install -q yt-dlp
           npm install
 
       - name: Fetch latest videos
         run: bash scripts/build-catalog.sh
 
-      - name: Run NER on new videos
+      - name: Tag new videos via AI gateway
         env:
-          TOKENIZERS_PARALLELISM: "false"
-        run: python3 scripts/extract-tags.py
+          FAGW_API_KEY: ${{ secrets.FAGW_API_KEY }}
+        run: node scripts/tag-videos.mjs
 
       - name: Check for changes
         id: diff
@@ -62,7 +45,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/catalog.json
-          NEW_COUNT=$(python3 -c "import json; d=json.load(open('public/catalog.json')); print(sum(len(s['videos']) for s in d['stations'].values()))")
+          NEW_COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('public/catalog.json','utf8')); console.log(Object.values(d.stations).reduce((s,st) => s + st.videos.length, 0))")
           git commit -m "Update catalog: ${NEW_COUNT} videos
 
           Automated weekly catalog refresh.

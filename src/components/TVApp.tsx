@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import type { Catalog, Video } from "@/lib/types";
 import { loadCatalog, getVideosForStation, pickRandom, formatDuration } from "@/lib/catalog";
-import { getWatchedIds, markWatched, getStats } from "@/lib/watched";
+import { getWatchedIds, markWatched, getStats, getBlockedSources, blockSource } from "@/lib/watched";
 import Link from "next/link";
 import Player, { type PlayerHandle } from "./Player";
 import Search from "./Search";
@@ -21,6 +21,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [hideWatched, setHideWatched] = useState(true);
   const [watchedIds, setWatchedIds] = useState<Set<string>>(() => getWatchedIds());
+  const [blockedSources, setBlockedSources] = useState<Set<string>>(() => getBlockedSources());
   const skippedRef = useRef(new Set<string>());
   const historyRef = useRef<Video[]>([]);
   const [hasHistory, setHasHistory] = useState(false);
@@ -57,7 +58,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       const videos = getVideosForStation(catalog, activeStation, cat || activeCategory);
       // Filter out watched if enabled, plus skipped (embed errors)
       const available = videos.filter(
-        (v) => !skippedRef.current.has(v.id) && (!hideWatched || !watchedIds.has(v.id))
+        (v) => !skippedRef.current.has(v.id) && (!hideWatched || !watchedIds.has(v.id)) && (!v.source || !blockedSources.has(v.source))
       );
 
       if (available.length < 5) {
@@ -80,7 +81,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         setStatus("No unwatched videos in this category");
       }
     },
-    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds, maybeMarkWatched]
+    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds, blockedSources, maybeMarkWatched]
   );
 
   const playPrev = useCallback(() => {
@@ -334,7 +335,25 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
                 <p className="text-white text-sm font-medium truncate">{currentVideo.title}</p>
                 <p className="text-white/40 text-xs mt-0.5 flex items-center gap-2">
                   <span className="text-red-500 font-semibold">{config.name}</span>
-                  {currentVideo.source && <span className="text-white/30">via {currentVideo.source}</span>}
+                  {currentVideo.source && (
+                    <span className="text-white/30 inline-flex items-center gap-1">
+                      via {currentVideo.source}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          blockSource(currentVideo.source!);
+                          setBlockedSources(new Set([...blockedSources, currentVideo.source!]));
+                          playNext();
+                        }}
+                        className="text-white/20 hover:text-red-400 transition-colors ml-0.5"
+                        title={`Block ${currentVideo.source}`}
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+                      </button>
+                    </span>
+                  )}
                   <span>{formatDuration(currentVideo.duration)}</span>
                   {status && <span className="text-yellow-500">{status}</span>}
                 </p>
