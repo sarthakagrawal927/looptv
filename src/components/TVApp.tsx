@@ -11,7 +11,7 @@ import stations from "../../channels.config";
 
 export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
-  const [activeStation, setActiveStation] = useState(initialChannel || stations[0].id);
+  const [activeStation] = useState(initialChannel || stations[0].id);
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
   const [status, setStatus] = useState<string>("Loading...");
@@ -20,9 +20,10 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const [muted, setMuted] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [hideWatched, setHideWatched] = useState(true);
-  const [watchedIds, setWatchedIds] = useState<Set<string>>(new Set());
+  const [watchedIds, setWatchedIds] = useState<Set<string>>(() => getWatchedIds());
   const skippedRef = useRef(new Set<string>());
   const historyRef = useRef<Video[]>([]);
+  const [hasHistory, setHasHistory] = useState(false);
   const playerRef = useRef<PlayerHandle>(null);
 
   const config = stations.find((s) => s.id === activeStation) ?? stations[0];
@@ -42,11 +43,6 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
     ];
   }, [catalog, activeStation]);
 
-  // Load watched state from localStorage
-  useEffect(() => {
-    setWatchedIds(getWatchedIds());
-  }, []);
-
   useEffect(() => {
     loadCatalog()
       .then((c) => { setCatalog(c); setStatus(""); })
@@ -54,12 +50,19 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   }, []);
 
   // Track video as watched when it starts playing
+  const currentVideoId = currentVideo?.id;
   useEffect(() => {
-    if (currentVideo && mode === "playing") {
-      markWatched(currentVideo.id, currentVideo.duration, activeStation, currentVideo.source || "");
-      setWatchedIds((prev) => new Set([...prev, currentVideo.id]));
-    }
-  }, [currentVideo, mode, activeStation]);
+    if (!currentVideoId || !currentVideo || mode !== "playing") return;
+    markWatched(currentVideoId, currentVideo.duration, activeStation, currentVideo.source || "");
+    const id = currentVideoId;
+    // Defer state update to avoid synchronous setState in effect
+    Promise.resolve().then(() => {
+      setWatchedIds((prev) => {
+        if (prev.has(id)) return prev;
+        return new Set([...prev, id]);
+      });
+    });
+  }, [currentVideoId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const playNext = useCallback(
     (cat?: string) => {
@@ -81,7 +84,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       const pool = available.length > 0 ? available : videos;
       const next = pickRandom(pool, currentVideo?.id);
       if (next) {
-        if (currentVideo) historyRef.current.push(currentVideo);
+        if (currentVideo) { historyRef.current.push(currentVideo); setHasHistory(true); }
         setCurrentVideo(next);
         setStatus("");
         setPaused(false);
@@ -95,11 +98,12 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const playPrev = useCallback(() => {
     const prev = historyRef.current.pop();
     if (prev) { setCurrentVideo(prev); setStatus(""); setPaused(false); }
+    setHasHistory(historyRef.current.length > 0);
   }, []);
 
   const playVideo = useCallback(
     (video: Video) => {
-      if (currentVideo) historyRef.current.push(currentVideo);
+      if (currentVideo) { historyRef.current.push(currentVideo); setHasHistory(true); }
       setCurrentVideo(video);
       setStatus("");
       setPaused(false);
@@ -118,7 +122,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         const available = hideWatched ? videos.filter((v) => !watchedIds.has(v.id)) : videos;
         const next = pickRandom(available.length > 0 ? available : videos);
         if (next) {
-          if (currentVideo) historyRef.current.push(currentVideo);
+          if (currentVideo) { historyRef.current.push(currentVideo); setHasHistory(true); }
           setCurrentVideo(next);
           setStatus("");
           setPaused(false);
@@ -176,7 +180,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   }, [mode, playNext, playPrev, handleCategoryChange, categories, searchOpen, startPlaying]);
 
   const handleError = useCallback(
-    (code: number) => {
+    (_code: number) => {
       if (currentVideo) skippedRef.current.add(currentVideo.id);
       setStatus("Skipping...");
       setTimeout(() => playNext(), 500);
@@ -368,7 +372,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </button>
             <div className="w-px h-5 bg-white/10 mx-1" />
-            <button onClick={playPrev} className={`p-2 rounded-lg transition-colors ${historyRef.current.length > 0 ? "text-white/60 hover:text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"}`} title="Previous (P)">
+            <button onClick={playPrev} className={`p-2 rounded-lg transition-colors ${hasHistory ? "text-white/60 hover:text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"}`} title="Previous (P)">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" /></svg>
             </button>
             <button onClick={() => { playerRef.current?.togglePlay(); setPaused((p) => !p); }} className="p-2 rounded-lg text-white hover:bg-white/10 transition-colors" title="Play/Pause (Space)">

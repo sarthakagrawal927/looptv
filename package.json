@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:catalog": "bash scripts/build-catalog.sh"
+    "build:catalog": "bash scripts/build-catalog.sh",
+    "build:ner": "python3 scripts/extract-tags.py",
+    "fetch:all": "bash scripts/fetch-all-sources.sh"
   },
   "dependencies": {
     "next": "16.2.2",

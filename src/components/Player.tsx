@@ -67,11 +67,13 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(function Player(
   const onReadyRef = useRef(onReady);
   const onPlayRef = useRef(onPlay);
   const onPauseRef = useRef(onPause);
-  onEndedRef.current = onEnded;
-  onErrorRef.current = onError;
-  onReadyRef.current = onReady;
-  onPlayRef.current = onPlay;
-  onPauseRef.current = onPause;
+  useEffect(() => {
+    onEndedRef.current = onEnded;
+    onErrorRef.current = onError;
+    onReadyRef.current = onReady;
+    onPlayRef.current = onPlay;
+    onPauseRef.current = onPause;
+  });
 
   useImperativeHandle(ref, () => ({
     togglePlay() {

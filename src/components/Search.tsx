@@ -17,12 +17,14 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    if (visible) {
+    if (!visible) return;
+    // Delay to avoid "/" keypress landing in input, and batch state resets
+    const t = setTimeout(() => {
       setQuery("");
       setSelectedIndex(0);
-      // Small delay so the "/" keypress doesn't end up in the input
-      setTimeout(() => inputRef.current?.focus(), 50);
-    }
+      inputRef.current?.focus();
+    }, 50);
+    return () => clearTimeout(t);
   }, [visible]);
 
   const results = useMemo(() => {
@@ -64,9 +66,10 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
     return scored.map((s) => s.video);
   }, [query, videos]);
 
-  useEffect(() => {
+  const handleQuery = (val: string) => {
+    setQuery(val);
     setSelectedIndex(0);
-  }, [query]);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
@@ -119,7 +122,7 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
               ref={inputRef}
               type="text"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => handleQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search videos, cast members, sketches..."
               className="w-full bg-transparent text-white text-lg px-3 py-4 outline-none placeholder:text-white/30"
