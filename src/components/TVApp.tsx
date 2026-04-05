@@ -225,8 +225,6 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
 
   // ── Lobby: channel selected ──
   if (mode === "lobby") {
-    const stats = getStats();
-    const stWatched = stats.byStation[activeStation] || 0;
 
     return (
       <div className="fixed inset-0 bg-black flex flex-col items-center justify-center px-6">
@@ -236,14 +234,19 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         </Link>
 
         <div className="text-center mb-8">
-          <h1 className="text-white text-4xl font-bold tracking-tight mb-1">{config.name}</h1>
+          <h1 className="text-white text-4xl font-bold tracking-tight mb-2">{config.name}</h1>
+          {config.sources.length > 1 && (
+            <div className="flex flex-wrap justify-center gap-1.5 mb-3 max-w-xl">
+              {config.sources.map((s) => (
+                <span key={s.handle} className="px-2.5 py-1 rounded-full bg-white/8 text-white/50 text-xs">
+                  {s.name}
+                </span>
+              ))}
+            </div>
+          )}
           <p className="text-white/40 text-sm">
-            {config.sources.length > 1 && config.sources.map((s) => s.name).join(" + ") + " \u00b7 "}
             {allVideos.length > 0 ? `${unwatchedCount.toLocaleString()} unwatched of ${allVideos.length.toLocaleString()}` : catalogLoaded ? "No videos" : "Loading..."}
           </p>
-          {stWatched > 0 && (
-            <p className="text-white/20 text-xs mt-1">{stWatched} videos watched in this channel</p>
-          )}
         </div>
 
         {categories.length > 1 && (
