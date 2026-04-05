@@ -204,7 +204,6 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
           {stations.map((st) => {
             const count = catalog?.stations?.[st.id]?.videos?.length ?? 0;
-            const stWatched = stats.byStation[st.id] || 0;
             return (
               <Link
                 key={st.id}
@@ -213,14 +212,9 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
               >
                 <h2 className="text-white text-lg font-semibold">{st.name}</h2>
                 <p className="text-white/40 text-sm mt-1">{st.description}</p>
-                <div className="flex items-center gap-2 mt-2">
-                  <p className="text-white/30 text-xs">
-                    {count ? `${count.toLocaleString()} videos` : catalogLoaded ? "No videos" : "Loading..."}
-                  </p>
-                  {stWatched > 0 && (
-                    <p className="text-white/20 text-xs">\u00b7 {stWatched} watched</p>
-                  )}
-                </div>
+                <p className="text-white/30 text-xs mt-2">
+                  {count ? `${count.toLocaleString()} videos` : catalogLoaded ? "No videos" : "Loading..."}
+                </p>
               </Link>
             );
           })}
