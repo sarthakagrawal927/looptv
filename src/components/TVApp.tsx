@@ -164,7 +164,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         case "n": case "arrowright": e.preventDefault(); playNext(); break;
         case "p": case "arrowleft": e.preventDefault(); playPrev(); break;
         case "m": e.preventDefault(); playerRef.current?.toggleMute(); setMuted((m) => !m); break;
-        case "f": e.preventDefault(); document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); break;
+        case "f": e.preventDefault(); if (document.fullscreenElement) { document.exitFullscreen(); } else { document.documentElement.requestFullscreen(); } break;
         case "w": e.preventDefault(); setHideWatched((h) => !h); break;
         default: {
           const n = parseInt(e.key);
@@ -180,7 +180,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   }, [mode, playNext, playPrev, handleCategoryChange, categories, searchOpen, startPlaying]);
 
   const handleError = useCallback(
-    (_code: number) => {
+    () => {
       if (currentVideo) skippedRef.current.add(currentVideo.id);
       setStatus("Skipping...");
       setTimeout(() => playNext(), 500);
@@ -393,7 +393,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>
               )}
             </button>
-            <button onClick={() => { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }} className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors" title="Fullscreen (F)">
+            <button onClick={() => { if (document.fullscreenElement) { document.exitFullscreen(); } else { document.documentElement.requestFullscreen(); } }} className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors" title="Fullscreen (F)">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
             </button>
           </div>

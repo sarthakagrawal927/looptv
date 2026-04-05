@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import TVApp from "@/components/TVApp";
 import stations from "../../../channels.config";
 import { notFound } from "next/navigation";
@@ -6,14 +7,31 @@ export function generateStaticParams() {
   return stations.map((s) => ({ channel: s.id }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ channel: string }> }) {
-  return params.then(({ channel }) => {
-    const st = stations.find((s) => s.id === channel);
-    return {
-      title: st ? `${st.name} | LoopTV` : "LoopTV",
-      description: st?.description || "Random clips from your favorite channels",
-    };
-  });
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ channel: string }>;
+}): Promise<Metadata> {
+  const { channel } = await params;
+  const st = stations.find((s) => s.id === channel);
+  if (!st) return { title: "LoopTV" };
+
+  return {
+    title: st.name,
+    description: st.description,
+    openGraph: {
+      title: `${st.name} | LoopTV`,
+      description: st.description,
+      url: `/${st.id}`,
+      siteName: "LoopTV",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${st.name} | LoopTV`,
+      description: st.description,
+    },
+  };
 }
 
 export default async function ChannelPage({

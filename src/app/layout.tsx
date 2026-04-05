@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 
@@ -7,9 +7,36 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://looptv.vercel.app";
+
 export const metadata: Metadata = {
-  title: "LoopTV",
+  title: {
+    default: "LoopTV",
+    template: "%s | LoopTV",
+  },
   description: "Random clips from your favorite channels, nonstop",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "LoopTV",
+    description: "Random clips from your favorite channels, nonstop",
+    url: siteUrl,
+    siteName: "LoopTV",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LoopTV",
+    description: "Random clips from your favorite channels, nonstop",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
