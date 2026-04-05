@@ -224,7 +224,7 @@
       { "name": "Economics Explained", "handle": "@EconomicsExplained", "minDuration": 120, "maxDuration": 1200 },
       { "name": "CaspianReport", "handle": "@CaspianReport", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Vox", "handle": "@Vox", "minDuration": 120, "maxDuration": 1200 },
-      { "name": "Neo", "handle": "@neo", "minDuration": 120, "maxDuration": 1200 }
+      { "name": "Neo", "handle": "@neoexplains", "minDuration": 120, "maxDuration": 1200 }
     ]
   },
   {
