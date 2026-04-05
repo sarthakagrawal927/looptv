@@ -15,6 +15,10 @@ export function getVideosForStation(
   stationId: string,
   categoryId: string
 ): Video[] {
+  if (stationId === "all") {
+    return Object.values(catalog.stations).flatMap((s) => s.videos);
+  }
+
   const station = catalog.stations[stationId];
   if (!station) return [];
 

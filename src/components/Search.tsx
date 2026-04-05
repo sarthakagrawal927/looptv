@@ -7,11 +7,14 @@ import { formatDuration } from "@/lib/catalog";
 interface SearchProps {
   videos: Video[];
   onSelect: (video: Video) => void;
+  onQueue?: (video: Video) => void;
   onClose: () => void;
   visible: boolean;
+  watchLaterIds?: Set<string>;
+  onToggleWatchLater?: (videoId: string) => void;
 }
 
-export default function Search({ videos, onSelect, onClose, visible }: SearchProps) {
+export default function Search({ videos, onSelect, onQueue, onClose, visible, watchLaterIds, onToggleWatchLater }: SearchProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -149,7 +152,6 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
                     <p className="text-white/40 text-xs mt-0.5 flex items-center gap-2">
                       {video.source && <span className="text-white/30">{video.source}</span>}
                       <span>{formatDuration(video.duration)}</span>
-                      {video.date && <span>{video.date}</span>}
                       {video.tags.length > 0 && (
                         <span className="truncate">
                           {video.tags.slice(0, 3).join(" \u00b7 ")}
@@ -157,11 +159,31 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
                       )}
                     </p>
                   </div>
-                  {i === selectedIndex && (
-                    <kbd className="text-white/20 text-xs bg-white/5 px-1.5 py-0.5 rounded shrink-0">
-                      &crarr;
-                    </kbd>
-                  )}
+                  <div className="flex items-center gap-1 shrink-0">
+                    {onToggleWatchLater && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onToggleWatchLater(video.id); }}
+                        className={`p-1.5 rounded transition-colors ${watchLaterIds?.has(video.id) ? "text-yellow-400" : "text-white/20 hover:text-white/50"}`}
+                        title={watchLaterIds?.has(video.id) ? "Remove from Watch Later" : "Watch Later"}
+                      >
+                        <svg className="w-4 h-4" fill={watchLaterIds?.has(video.id) ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                      </button>
+                    )}
+                    {onQueue && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onQueue(video); }}
+                        className="p-1.5 rounded text-white/20 hover:text-white/50 transition-colors"
+                        title="Add to queue"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                      </button>
+                    )}
+                    {i === selectedIndex && (
+                      <kbd className="text-white/20 text-xs bg-white/5 px-1.5 py-0.5 rounded">
+                        &crarr;
+                      </kbd>
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
@@ -171,11 +193,45 @@ export default function Search({ videos, onSelect, onClose, visible }: SearchPro
               No results for &ldquo;{query}&rdquo;
             </div>
           )}
-          {!query.trim() && (
-            <div className="px-4 py-6 text-center text-white/30 text-sm">
-              Type to search across {videos.length.toLocaleString()} videos
-            </div>
-          )}
+          {!query.trim() && (() => {
+            const wlVideos = watchLaterIds && watchLaterIds.size > 0
+              ? videos.filter((v) => watchLaterIds.has(v.id))
+              : [];
+            return wlVideos.length > 0 ? (
+              <div>
+                <p className="px-4 pt-3 pb-1 text-white/30 text-xs font-medium uppercase tracking-wider">Watch Later</p>
+                <div className="max-h-[50vh] overflow-y-auto">
+                  {wlVideos.map((video) => (
+                    <button
+                      key={video.id}
+                      onClick={() => onSelect(video)}
+                      className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <p className="text-white text-sm truncate">{video.title}</p>
+                        <p className="text-white/40 text-xs mt-0.5">
+                          {video.source && <span className="text-white/30">{video.source}</span>}
+                        </p>
+                      </div>
+                      {onToggleWatchLater && (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); onToggleWatchLater(video.id); }}
+                          className="p-1.5 rounded text-yellow-400 transition-colors"
+                          title="Remove from Watch Later"
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                        </button>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="px-4 py-6 text-center text-white/30 text-sm">
+                Type to search across {videos.length.toLocaleString()} videos
+              </div>
+            );
+          })()}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 const WATCHED_KEY = "looptv_watched";
 const STATS_KEY = "looptv_stats";
 const BLOCKED_KEY = "looptv_blocked_sources";
+const WATCH_LATER_KEY = "looptv_watch_later";
 
 export interface WatchStats {
   totalWatched: number;
@@ -92,4 +93,29 @@ export function unblockSource(source: string): void {
   const blocked = getBlockedSources();
   blocked.delete(source);
   localStorage.setItem(BLOCKED_KEY, JSON.stringify([...blocked]));
+}
+
+export function getWatchLater(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(WATCH_LATER_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addWatchLater(videoId: string): void {
+  if (typeof window === "undefined") return;
+  const list = getWatchLater();
+  if (!list.includes(videoId)) {
+    list.push(videoId);
+    localStorage.setItem(WATCH_LATER_KEY, JSON.stringify(list));
+  }
+}
+
+export function removeWatchLater(videoId: string): void {
+  if (typeof window === "undefined") return;
+  const list = getWatchLater().filter((id) => id !== videoId);
+  localStorage.setItem(WATCH_LATER_KEY, JSON.stringify(list));
 }
