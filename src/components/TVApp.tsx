@@ -28,20 +28,9 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
 
   const config = stations.find((s) => s.id === activeStation) ?? stations[0];
 
-  const categories = useMemo(() => {
-    const sc = catalog?.stations?.[activeStation];
-    if (!sc) return [{ id: "all", name: "All" }];
-    return [
-      { id: "all", name: "All" },
-      ...Object.entries(sc.categoryVideoIds)
-        .map(([id, ids]) => ({
-          id,
-          name: id.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-          count: ids.length,
-        }))
-        .sort((a, b) => b.count - a.count),
-    ];
-  }, [catalog, activeStation]);
+  // v2: Topic-based categories via zero-shot classification
+  // NER categories (person/place extraction) were too noisy for useful filtering
+  const categories = [{ id: "all", name: "All" }];
 
   useEffect(() => {
     loadCatalog()
@@ -286,7 +275,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
             className="bg-red-600 hover:bg-red-500 disabled:bg-white/10 disabled:text-white/30 text-white text-lg font-semibold px-8 py-3.5 rounded-xl transition-colors flex items-center gap-3"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-            Shuffle Play
+            Play
           </button>
           <button
             onClick={() => setSearchOpen(true)}
@@ -399,21 +388,6 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-4 pb-2 overflow-x-auto scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryChange(cat.id)}
-              className={`px-2.5 py-1 rounded-md text-xs whitespace-nowrap transition-colors ${
-                cat.id === activeCategory
-                  ? "bg-white/15 text-white font-medium"
-                  : "text-white/40 hover:bg-white/10 hover:text-white/70"
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
       </div>
 
       <Search videos={allVideos} onSelect={playVideo} onClose={() => setSearchOpen(false)} visible={searchOpen} />

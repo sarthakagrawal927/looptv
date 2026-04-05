@@ -46,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.variable}>
-      <body className="bg-black overflow-hidden">{children}</body>
+      <body className="bg-black">{children}</body>
     </html>
   );
 }
