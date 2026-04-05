@@ -10,7 +10,7 @@
   {
     "id": "science",
     "name": "Science",
-    "description": "Kurzgesagt, TED-Ed, Veritasium, SmarterEveryDay, and more",
+    "description": "Kurzgesagt, Veritasium, SmarterEveryDay, and more",
     "sources": [
       { "name": "Kurzgesagt", "handle": "@kurzgesagt", "minDuration": 120, "maxDuration": 3600 },
       { "name": "TED-Ed", "handle": "@TEDEd", "minDuration": 120, "maxDuration": 1800 },
@@ -28,9 +28,23 @@
     ]
   },
   {
+    "id": "space",
+    "name": "Space",
+    "description": "PBS Space Time, Astrum, Cool Worlds, Everyday Astronaut, and more",
+    "sources": [
+      { "name": "PBS Space Time", "handle": "@pbsspacetime", "minDuration": 120, "maxDuration": 1500 },
+      { "name": "Astrum", "handle": "@astrumspace", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Cool Worlds", "handle": "@coolworldslab", "minDuration": 120, "maxDuration": 2400 },
+      { "name": "Everyday Astronaut", "handle": "@everydayastronaut", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "melodysheep", "handle": "@melodysheep", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Primal Space", "handle": "@primalspace", "minDuration": 120, "maxDuration": 900 },
+      { "name": "Dr. Becky", "handle": "@drbecky", "minDuration": 120, "maxDuration": 1200 }
+    ]
+  },
+  {
     "id": "tech",
     "name": "Tech",
-    "description": "Fireship, ColdFusion, NetworkChuck, and more",
+    "description": "Fireship, ColdFusion, Sebastian Lague, Technology Connections, and more",
     "sources": [
       { "name": "Fireship", "handle": "@Fireship", "minDuration": 30, "maxDuration": 1800 },
       { "name": "Beyond Fireship", "handle": "@beyondfireship", "minDuration": 60, "maxDuration": 1800 },
@@ -38,7 +52,15 @@
       { "name": "ColdFusion", "handle": "@ColdFusion", "minDuration": 300, "maxDuration": 3600 },
       { "name": "Tech Tangents", "handle": "@TechTangents", "minDuration": 120, "maxDuration": 2400 },
       { "name": "KRAZAM", "handle": "@KRAZAM", "minDuration": 30, "maxDuration": 600 },
-      { "name": "Low Level", "handle": "@LowLevelTV", "minDuration": 60, "maxDuration": 1200 }
+      { "name": "Low Level", "handle": "@LowLevelTV", "minDuration": 60, "maxDuration": 1200 },
+      { "name": "CodeAesthetic", "handle": "@CodeAesthetic", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "No Boilerplate", "handle": "@NoBoilerplate", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Theo", "handle": "@t3dotgg", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "Sebastian Lague", "handle": "@SebastianLague", "minDuration": 120, "maxDuration": 3000 },
+      { "name": "Technology Connections", "handle": "@TechnologyConnections", "minDuration": 120, "maxDuration": 2100 },
+      { "name": "Dave's Garage", "handle": "@DavesGarage", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Stuff Made Here", "handle": "@StuffMadeHere", "minDuration": 120, "maxDuration": 1500 },
+      { "name": "Ben Eater", "handle": "@beneater", "minDuration": 120, "maxDuration": 1800 }
     ]
   },
   {
@@ -94,7 +116,7 @@
   {
     "id": "startups",
     "name": "Startups",
-    "description": "Y Combinator, Garry Tan, Startup Archive, and more",
+    "description": "Y Combinator, Garry Tan, Slidebean, Company Man, and more",
     "sources": [
       { "name": "Y Combinator", "handle": "@ycombinator", "minDuration": 120, "maxDuration": 3600 },
       { "name": "YC Root Access", "handle": "@ycrootaccess", "minDuration": 60, "maxDuration": 1800 },
@@ -102,7 +124,10 @@
       { "name": "Startup Archive", "handle": "@startuparchive_", "minDuration": 60, "maxDuration": 1800 },
       { "name": "EO", "handle": "@eoglobal", "minDuration": 120, "maxDuration": 3600 },
       { "name": "Honestly by Tanmay Bhat", "handle": "@HonestlybyTanmayBhat", "minDuration": 120, "maxDuration": 3600 },
-      { "name": "Sahil Bloom", "handle": "@Sahil_Bloom", "minDuration": 60, "maxDuration": 1800 }
+      { "name": "Sahil Bloom", "handle": "@Sahil_Bloom", "minDuration": 60, "maxDuration": 1800 },
+      { "name": "Slidebean", "handle": "@slidebean", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Company Man", "handle": "@companyman114", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Noah Kagan", "handle": "@NoahKagan", "minDuration": 120, "maxDuration": 1500 }
     ]
   },
   {
@@ -117,6 +142,21 @@
     ]
   },
   {
+    "id": "philosophy",
+    "name": "Philosophy",
+    "description": "Exurb1a, Pursuit of Wonder, Einzelganger, Academy of Ideas, and more",
+    "sources": [
+      { "name": "Exurb1a", "handle": "@Exurb1a", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Pursuit of Wonder", "handle": "@pursuitofwonder", "minDuration": 120, "maxDuration": 900 },
+      { "name": "Einzelganger", "handle": "@einzelganger", "minDuration": 120, "maxDuration": 1500 },
+      { "name": "Academy of Ideas", "handle": "@academyofideas", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Like Stories of Old", "handle": "@likestoriesofold", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "Sisyphus 55", "handle": "@sisyphus55", "minDuration": 120, "maxDuration": 600 },
+      { "name": "Freedom in Thought", "handle": "@FreedominThought", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Sprouts", "handle": "@sprouts", "minDuration": 120, "maxDuration": 900 }
+    ]
+  },
+  {
     "id": "mindset",
     "name": "Self-Improvement",
     "description": "Huberman, Charisma on Command, and more",
@@ -124,10 +164,8 @@
       { "name": "Improvement Pill", "handle": "@ImprovementPill", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Charisma on Command", "handle": "@Charismaoncommand", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Mark Manson", "handle": "@IAmMarkManson", "minDuration": 120, "maxDuration": 1800 },
-      { "name": "Freedom in Thought", "handle": "@FreedominThought", "minDuration": 120, "maxDuration": 1200 },
       { "name": "Bryan Johnson", "handle": "@BryanJohnson", "minDuration": 120, "maxDuration": 1800 },
-      { "name": "Huberman Lab Clips", "handle": "@HubermanLabClips", "minDuration": 120, "maxDuration": 1800 },
-      { "name": "Sprouts", "handle": "@sprouts", "minDuration": 120, "maxDuration": 900 }
+      { "name": "Huberman Lab Clips", "handle": "@HubermanLabClips", "minDuration": 120, "maxDuration": 1800 }
     ]
   },
   {
@@ -160,6 +198,33 @@
     "description": "The best TED talks",
     "sources": [
       { "name": "TED", "handle": "@TED", "minDuration": 300, "maxDuration": 1800 }
+    ]
+  },
+  {
+    "id": "design",
+    "name": "Design",
+    "description": "Juxtopposed, The Futur, 30X40 Design Workshop, NNgroup",
+    "sources": [
+      { "name": "Juxtopposed", "handle": "@juxtopposed", "minDuration": 60, "maxDuration": 900 },
+      { "name": "The Futur", "handle": "@thefutur", "minDuration": 120, "maxDuration": 3600 },
+      { "name": "30X40 Design Workshop", "handle": "@30by40", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "NNgroup", "handle": "@NNgroup", "minDuration": 60, "maxDuration": 900 }
+    ]
+  },
+  {
+    "id": "explainers",
+    "name": "Explainers",
+    "description": "Wendover, RealLifeLore, Johnny Harris, PolyMatter, and more",
+    "sources": [
+      { "name": "Wendover Productions", "handle": "@Wendoverproductions", "minDuration": 120, "maxDuration": 1500 },
+      { "name": "RealLifeLore", "handle": "@reallifelore", "minDuration": 120, "maxDuration": 2400 },
+      { "name": "Johnny Harris", "handle": "@johnnyharris", "minDuration": 120, "maxDuration": 1800 },
+      { "name": "PolyMatter", "handle": "@polymatter", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Half as Interesting", "handle": "@halfasinteresting", "minDuration": 60, "maxDuration": 600 },
+      { "name": "Economics Explained", "handle": "@EconomicsExplained", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "CaspianReport", "handle": "@CaspianReport", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Vox", "handle": "@Vox", "minDuration": 120, "maxDuration": 1200 },
+      { "name": "Neo", "handle": "@neo", "minDuration": 120, "maxDuration": 1200 }
     ]
   },
   {

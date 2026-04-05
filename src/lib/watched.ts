@@ -1,5 +1,6 @@
 const WATCHED_KEY = "looptv_watched";
 const STATS_KEY = "looptv_stats";
+const BLOCKED_KEY = "looptv_blocked_sources";
 
 export interface WatchStats {
   totalWatched: number;
@@ -67,4 +68,28 @@ export function clearWatched(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(WATCHED_KEY);
   localStorage.removeItem(STATS_KEY);
+}
+
+export function getBlockedSources(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = localStorage.getItem(BLOCKED_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+export function blockSource(source: string): void {
+  if (typeof window === "undefined") return;
+  const blocked = getBlockedSources();
+  blocked.add(source);
+  localStorage.setItem(BLOCKED_KEY, JSON.stringify([...blocked]));
+}
+
+export function unblockSource(source: string): void {
+  if (typeof window === "undefined") return;
+  const blocked = getBlockedSources();
+  blocked.delete(source);
+  localStorage.setItem(BLOCKED_KEY, JSON.stringify([...blocked]));
 }
