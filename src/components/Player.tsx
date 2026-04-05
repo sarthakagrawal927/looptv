@@ -15,6 +15,7 @@ export interface PlayerHandle {
   volumeUp: () => void;
   volumeDown: () => void;
   getState: () => { paused: boolean; muted: boolean; volume: number };
+  getWatchProgress: () => number; // 0-1, how far through the video
 }
 
 interface PlayerProps {
@@ -113,6 +114,13 @@ const Player = forwardRef<PlayerHandle, PlayerProps>(function Player(
         muted: p.isMuted(),
         volume: p.getVolume(),
       };
+    },
+    getWatchProgress() {
+      const p = playerRef.current;
+      if (!p || typeof p.getCurrentTime !== "function" || typeof p.getDuration !== "function") return 0;
+      const duration = p.getDuration();
+      if (!duration || duration <= 0) return 0;
+      return p.getCurrentTime() / duration;
     },
   }));
 

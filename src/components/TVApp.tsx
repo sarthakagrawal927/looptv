@@ -38,20 +38,18 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       .catch(() => setStatus("No catalog found. Run: pnpm run build:catalog"));
   }, []);
 
-  // Track video as watched when it starts playing
-  const currentVideoId = currentVideo?.id;
-  useEffect(() => {
-    if (!currentVideoId || !currentVideo || mode !== "playing") return;
-    markWatched(currentVideoId, currentVideo.duration, activeStation, currentVideo.source || "");
-    const id = currentVideoId;
-    // Defer state update to avoid synchronous setState in effect
-    Promise.resolve().then(() => {
+  // Mark video as watched only if user watched >= 50%
+  const maybeMarkWatched = useCallback((video: Video | null, forceWatched = false) => {
+    if (!video) return;
+    const progress = playerRef.current?.getWatchProgress() ?? 0;
+    if (forceWatched || progress >= 0.5) {
+      markWatched(video.id, video.duration, activeStation, video.source || "");
       setWatchedIds((prev) => {
-        if (prev.has(id)) return prev;
-        return new Set([...prev, id]);
+        if (prev.has(video.id)) return prev;
+        return new Set([...prev, video.id]);
       });
-    });
-  }, [currentVideoId]); // eslint-disable-line react-hooks/exhaustive-deps
+    }
+  }, [activeStation]);
 
   const playNext = useCallback(
     (cat?: string) => {
@@ -73,6 +71,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       const pool = available.length > 0 ? available : videos;
       const next = pickRandom(pool, currentVideo?.id);
       if (next) {
+        maybeMarkWatched(currentVideo);
         if (currentVideo) { historyRef.current.push(currentVideo); setHasHistory(true); }
         setCurrentVideo(next);
         setStatus("");
@@ -81,17 +80,19 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         setStatus("No unwatched videos in this category");
       }
     },
-    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds]
+    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds, maybeMarkWatched]
   );
 
   const playPrev = useCallback(() => {
+    maybeMarkWatched(currentVideo);
     const prev = historyRef.current.pop();
     if (prev) { setCurrentVideo(prev); setStatus(""); setPaused(false); }
     setHasHistory(historyRef.current.length > 0);
-  }, []);
+  }, [currentVideo, maybeMarkWatched]);
 
   const playVideo = useCallback(
     (video: Video) => {
+      maybeMarkWatched(currentVideo);
       if (currentVideo) { historyRef.current.push(currentVideo); setHasHistory(true); }
       setCurrentVideo(video);
       setStatus("");
@@ -99,7 +100,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       setSearchOpen(false);
       setMode("playing");
     },
-    [currentVideo]
+    [currentVideo, maybeMarkWatched]
   );
 
   const handleCategoryChange = useCallback(
@@ -318,7 +319,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       <div className="bg-zinc-950 border-t border-white/10 shrink-0">
         <div className="flex items-center gap-3 px-4 py-2">
           <button
-            onClick={() => { setMode("lobby"); setCurrentVideo(null); }}
+            onClick={() => { maybeMarkWatched(currentVideo); setMode("lobby"); setCurrentVideo(null); }}
             className="p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors shrink-0"
             title="Back to channel"
           >
