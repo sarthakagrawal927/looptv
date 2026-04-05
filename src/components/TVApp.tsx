@@ -22,6 +22,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
   const [hideWatched, setHideWatched] = useState(true);
   const [watchedIds, setWatchedIds] = useState<Set<string>>(() => getWatchedIds());
   const [blockedSources, setBlockedSources] = useState<Set<string>>(() => getBlockedSources());
+  const [activeSources, setActiveSources] = useState<Set<string> | null>(null); // null = all active
   const skippedRef = useRef(new Set<string>());
   const historyRef = useRef<Video[]>([]);
   const [hasHistory, setHasHistory] = useState(false);
@@ -58,7 +59,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
       const videos = getVideosForStation(catalog, activeStation, cat || activeCategory);
       // Filter out watched if enabled, plus skipped (embed errors)
       const available = videos.filter(
-        (v) => !skippedRef.current.has(v.id) && (!hideWatched || !watchedIds.has(v.id)) && (!v.source || !blockedSources.has(v.source))
+        (v) => !skippedRef.current.has(v.id) && (!hideWatched || !watchedIds.has(v.id)) && (!v.source || !blockedSources.has(v.source)) && (!activeSources || !v.source || activeSources.has(v.source))
       );
 
       if (available.length < 5) {
@@ -81,7 +82,7 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
         setStatus("No unwatched videos in this category");
       }
     },
-    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds, blockedSources, maybeMarkWatched]
+    [catalog, activeStation, activeCategory, currentVideo, hideWatched, watchedIds, blockedSources, activeSources, maybeMarkWatched]
   );
 
   const playPrev = useCallback(() => {
@@ -237,11 +238,40 @@ export default function TVApp({ initialChannel }: { initialChannel?: string }) {
           <h1 className="text-white text-4xl font-bold tracking-tight mb-2">{config.name}</h1>
           {config.sources.length > 1 && (
             <div className="flex flex-wrap justify-center gap-1.5 mb-3 max-w-xl">
-              {config.sources.map((s) => (
-                <span key={s.handle} className="px-2.5 py-1 rounded-full bg-white/8 text-white/50 text-xs">
-                  {s.name}
-                </span>
-              ))}
+              {config.sources.map((s) => {
+                const isActive = !activeSources || activeSources.has(s.name);
+                return (
+                  <button
+                    key={s.handle}
+                    onClick={() => {
+                      setActiveSources((prev) => {
+                        const allNames = new Set(config.sources.map((src) => src.name));
+                        if (!prev) {
+                          // First click: deselect this one, activate all others
+                          allNames.delete(s.name);
+                          return allNames;
+                        }
+                        const next = new Set(prev);
+                        if (next.has(s.name)) {
+                          next.delete(s.name);
+                          // Don't allow empty — reselect all
+                          return next.size === 0 ? null : next;
+                        }
+                        next.add(s.name);
+                        // If all re-selected, reset to null
+                        return next.size === allNames.size ? null : next;
+                      });
+                    }}
+                    className={`px-2.5 py-1 rounded-full text-xs transition-colors ${
+                      isActive
+                        ? "bg-white/15 text-white/70"
+                        : "bg-white/5 text-white/20 line-through"
+                    }`}
+                  >
+                    {s.name}
+                  </button>
+                );
+              })}
             </div>
           )}
           <p className="text-white/40 text-sm">
