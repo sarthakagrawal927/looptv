@@ -6,3 +6,4 @@ assets = { directory = ".open-next/assets" }
 
 [vars]
 NODE_ENV = "production"
+NEXT_PUBLIC_SAASMAKER_API_KEY = "pk_07f1e1107e55807befc5def444a422f34b4310ee7c07c392"

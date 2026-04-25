@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "test": "vitest run",
     "lint": "eslint",
     "build:catalog": "bash scripts/build-catalog.sh",
     "build:ner": "python3 scripts/extract-tags.py",
     "fetch:all": "bash scripts/fetch-all-sources.sh",
-    "cf:build": "opennextjs-cloudflare build"
+    "cf:build": "opennextjs-cloudflare build",
+    "deploy": "pnpm cf:build && wrangler deploy"
   },
   "dependencies": {
     "next": "16.2.4",

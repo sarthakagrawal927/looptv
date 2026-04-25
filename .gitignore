@@ -41,3 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 data/
+
+# CF/open-next build artifacts
+.open-next/
+.wrangler/
