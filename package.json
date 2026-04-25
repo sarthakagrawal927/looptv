@@ -10,7 +10,8 @@
     "lint": "eslint",
     "build:catalog": "bash scripts/build-catalog.sh",
     "build:ner": "python3 scripts/extract-tags.py",
-    "fetch:all": "bash scripts/fetch-all-sources.sh"
+    "fetch:all": "bash scripts/fetch-all-sources.sh",
+    "cf:build": "opennextjs-cloudflare build"
   },
   "dependencies": {
     "next": "16.2.4",
@@ -18,6 +19,7 @@
     "react-dom": "19.2.5"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.19.4",
     "@playwright/test": "^1.59.1",
     "@saas-maker/eslint-config": "file:../saas-maker/packages/tooling/eslint-config",
     "@saas-maker/prettier-config": "file:../saas-maker/packages/tooling/prettier-config",
@@ -32,7 +34,8 @@
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "wrangler": "^4.85.0"
   },
   "prettier": "@saas-maker/prettier-config"
 }
