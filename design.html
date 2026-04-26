@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LoopTV | The Velvet Theater Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#ffb4aa",
+                    "on-tertiary-container": "#f8f9ff",
+                    "on-tertiary": "#003061",
+                    "tertiary-container": "#0072d7",
+                    "on-background": "#e5e2e1",
+                    "inverse-primary": "#c0000c",
+                    "on-primary-fixed": "#410001",
+                    "error-container": "#93000a",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary": "#ffb4aa",
+                    "surface-tint": "#ffb4aa",
+                    "secondary-container": "#921512",
+                    "on-primary": "#690003",
+                    "on-tertiary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#a7c8ff",
+                    "secondary-fixed": "#ffdad5",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed-dim": "#ffb4aa",
+                    "on-primary-container": "#fff7f6",
+                    "on-surface": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed": "#d5e3ff",
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "outline-variant": "#5e3f3b",
+                    "on-secondary-fixed-variant": "#8e1210",
+                    "on-secondary-fixed": "#410001",
+                    "tertiary": "#a7c8ff",
+                    "surface-dim": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "on-surface-variant": "#e9bcb6",
+                    "primary-fixed": "#ffdad5",
+                    "on-tertiary-fixed-variant": "#004689",
+                    "on-secondary": "#690003",
+                    "surface-container": "#201f1f",
+                    "primary-container": "#e50914",
+                    "on-error-container": "#ffdad6",
+                    "primary": "#ffb4aa",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-bright": "#3a3939",
+                    "outline": "#af8782",
+                    "on-secondary-container": "#ff9f93",
+                    "on-primary-fixed-variant": "#930007"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "display": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #131313; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(40px); background: rgba(19, 19, 19, 0.6); }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e50914; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-[40px] bg-gradient-to-b from-[#131313] to-transparent shadow-[0_20px_50px_rgba(229,9,20,0.1)]">
+<div class="flex justify-between items-center px-6 md:px-12 py-6 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#E50914] text-3xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="text-2xl font-black text-[#E50914] tracking-tighter uppercase font-['Manrope']">LoopTV</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#E50914] font-bold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#E50914] font-['Manrope']" href="#">Movies</a>
+<a class="text-zinc-400 hover:text-white transition-colors font-['Manrope']" href="#">TV Shows</a>
+<a class="text-zinc-400 hover:text-white transition-colors font-['Manrope']" href="#">Live TV</a>
+<a class="text-zinc-400 hover:text-white transition-colors font-['Manrope']" href="#">My List</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-zinc-100 hover:bg-white/5 backdrop-blur-md rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="px-6 py-2 bg-primary-container text-on-primary-container rounded-full font-bold transition-transform duration-500 ease-out hover:scale-105">
+                    Sign In
+                </button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex items-end overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent z-10"></div>
+<img alt="Cinematic background" class="w-full h-full object-cover" data-alt="stunning wide cinematic shot of a futuristic neon city at night with flying vehicles and glowing rain-slicked streets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEMF3CNv0FSmUnjc__P3jVIHbiyAN6YomFmY5iHUWfSXYZuJ8kPS-fZr6yx2gA-FvPA5YGrOafGaJB3TQgByS5_uOTdmK_p5KyDkniDr9m-pjFYwp6ofDXMArisxAzQfEWirqvdV8iEGZKRDf-431OCnKch0bEHgj1avdG5Z7trBJWRM2Gbh_C5y8U8CYkbOqlbRc-yTdt9dvFnXWj5d8MlhTR4V78ASquUly1c_SbXcIQ4HTmLnGKPZ9sxPPxPaOzMBqUPVFbmXGe"/>
+<div class="absolute inset-0 bg-primary-container/10 z-0 radial-glow" style="background: radial-gradient(circle at center, rgba(229, 9, 20, 0.15) 0%, transparent 70%);"></div>
+</div>
+<div class="relative z-20 px-6 md:px-12 pb-24 max-w-4xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] uppercase font-black px-2 py-1 rounded-sm tracking-widest">Featured</span>
+<span class="text-secondary font-bold text-sm tracking-wide">4K Ultra HD • HDR</span>
+</div>
+<h1 class="font-display font-black text-6xl md:text-8xl tracking-tighter mb-6 leading-none">THE VOID <br/> BEYOND</h1>
+<p class="font-body text-lg md:text-xl text-on-surface/80 max-w-2xl mb-10 leading-relaxed">
+                In a world where memories can be rewritten, one rogue architect uncovers the truth behind the simulated sky. Experience the visual masterpiece of the decade.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-10 py-4 bg-primary-container text-on-primary-container rounded-full font-black text-lg flex items-center gap-3 transition-all duration-300 hover:scale-105 shadow-[0_20px_50px_rgba(229,9,20,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    Watch Now
+                </button>
+<button class="px-10 py-4 bg-surface-variant/40 backdrop-blur-xl text-on-surface rounded-full font-black text-lg border border-white/5 transition-all hover:bg-surface-variant/60">
+                    View Details
+                </button>
+</div>
+</div>
+</section>
+<!-- Curated Channels -->
+<section class="py-20 bg-background relative overflow-hidden">
+<div class="px-6 md:px-12 mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-on-surface/60 font-bold uppercase tracking-widest text-sm mb-2">Exclusive Channels</h2>
+<h3 class="font-headline font-extrabold text-4xl">LoopTV Originals</h3>
+</div>
+<div class="flex gap-2">
+<button class="p-3 rounded-full bg-surface-container-high text-on-surface hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 rounded-full bg-surface-container-high text-on-surface hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto px-6 md:px-12 no-scrollbar pb-10">
+<!-- Channel Card 1 -->
+<div class="min-w-[280px] group cursor-pointer">
+<div class="h-40 rounded-xl overflow-hidden relative mb-4 transition-transform duration-500 group-hover:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+<img alt="Channel art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="abstract artistic visualization of deep space nebula with deep reds and oranges glowing against dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2l_uxKLU6ee8nQ7T4a9krwwVoYe0kxRVnx5UqsI40Y84FU1-Y0HMQ7ORRyPNifMA_fohcbQs_Suvd3dRiV8Ah66RLmsRRC07r6OkJg5XOLRt5PfVHkok5u6c5HqQxFnMXVGWcBqYv0CgW2CraJAfhWgTY-RyHDkfv6AbwGsw320TH5EYbLuIUlHTDScugGwafiVpaApK4TQoPJRBqxzvUBXBeFIKuVCTfT1Fu-NIwnW0kxVUHFIYbeCsP3M5lgDCI6Pb6TrF8-fI4"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">auto_awesome</span>
+</div>
+<span class="font-bold text-sm">NEBULA PRIME</span>
+</div>
+</div>
+</div>
+<!-- Channel Card 2 -->
+<div class="min-w-[280px] group cursor-pointer">
+<div class="h-40 rounded-xl overflow-hidden relative mb-4 transition-transform duration-500 group-hover:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+<img alt="Channel art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="retro tech setup with old televisions and neon grid graphics in deep synthwave colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLiilhrGjIamtKV3pL_aYTo3Zu4kdrPrlL1G72NkyIspeXsDi_QFatzJ2VXu75XJ3Mszcu69csLoxH5gEV4zM7czK2ihvuZqQQIuEgnDmk_efn0vN7XNOhgh7yL7W7jLFIo4yi8dGQahsiVNNaeXvv3i1BKDjclXihotcM4YM4IqhGiIrEwzuxdHifhmp9zFba2RgoErCBVxHqMG80emCRnNapDCM2Y7KHjL04Z7dMIEzSmfnJoJhXoc3zjYxl5_tVQkvMz9nZfFWX"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-[#0072d7] flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">videogame_asset</span>
+</div>
+<span class="font-bold text-sm">RETRO WAVE</span>
+</div>
+</div>
+</div>
+<!-- Channel Card 3 -->
+<div class="min-w-[280px] group cursor-pointer">
+<div class="h-40 rounded-xl overflow-hidden relative mb-4 transition-transform duration-500 group-hover:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+<img alt="Channel art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="dramatic theater stage with heavy red velvet curtains and spotlights shining from the ceiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJOgqi3UG-eBnNAPtIEHpomLt_7jGWTvbgXuRrbozjesXmf-f62MX1j8HMnXHr1HxSOP7UmCzv_7BfZsJ3x4AXcRVJtFoKslOiEeplYacA3JPF2OxxH6Axye6E6iWmdp0ilzbL1nbjM2x3ORnnUsONIIFM5Kr4USf4TB3WTrAVolLNkuIZZIyp9F1Kjx72QKcX7qtU8mW7pWbesaNy5vYdd6qUzCzKqyw6kXq7VV0kYWIwbMdLjofPxzJNmp4PThXc6bRfjF_cxHBF"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">movie</span>
+</div>
+<span class="font-bold text-sm">CINEMA VIVID</span>
+</div>
+</div>
+</div>
+<!-- Channel Card 4 -->
+<div class="min-w-[280px] group cursor-pointer">
+<div class="h-40 rounded-xl overflow-hidden relative mb-4 transition-transform duration-500 group-hover:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+<img alt="Channel art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="modern live music concert stage with bright stage lights and silhouettes of musicians" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvDaMJ1ZB7MhghSZ7j3kcZE3BngYxXSN93v6zNASEfM_UM4g3KDBTrYAXWx7WNQxwnMkKho74v0qE5gFwa2lnpxQBC7HCNOSL-30DGJA58GyzfA5kxpGPeLxIs8lagH-AX8x_IOUwuLHEPrFf578kTrqzekX0fXHCh-EPJbYwjJkEsekGbM6yvGKY925lCppKxz5iIySmWkIZVBYleEasbLodSBXeRxMflELftbSFHG7syZUlCI3jiTdEHwMoeeQVx5NlmoT0cTQ2c"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">music_note</span>
+</div>
+<span class="font-bold text-sm">SONIC STAGE</span>
+</div>
+</div>
+</div>
+<!-- Channel Card 5 -->
+<div class="min-w-[280px] group cursor-pointer">
+<div class="h-40 rounded-xl overflow-hidden relative mb-4 transition-transform duration-500 group-hover:scale-95 shadow-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+<img alt="Channel art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="stunning milky way galaxy photograph showing billions of stars in the night sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgvd1-ayAzjN_2WqCI3ZOQ7ri196kCYlEVIiJoDQNh0asIb3SmybeS_i_WNcnxYiBl63GVeqVqoJXqn23ftgVoeHHzJ5ADthmy1L9JzuFVHU3NV_rJqd6iPLhdgHMCZzRybT-oRlfYNSaVv60hTqjtFko5hP-IyPU8JMP6DFGnzc-RlF45j9V54PqbIH-zWyGJZeqPntHfzk3r0lKjX9PrGkdC8NOFtQtEnXnudHCWH4IOrIOJ1J22oEpKfNoPiKs-7YweEXMTCSoo"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">public</span>
+</div>
+<span class="font-bold text-sm">COSMOS TV</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive TV Guide -->
+<section class="py-20 bg-surface-container-low px-6 md:px-12">
+<div class="max-w-6xl mx-auto">
+<div class="mb-12">
+<h2 class="font-headline font-extrabold text-4xl mb-4">TV Guide</h2>
+<div class="flex gap-4 overflow-x-auto no-scrollbar">
+<button class="px-6 py-2 bg-primary-container text-on-primary-container rounded-full font-bold whitespace-nowrap">NOW SHOWING</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface hover:bg-surface-bright rounded-full font-bold whitespace-nowrap transition-colors">8:00 PM</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface hover:bg-surface-bright rounded-full font-bold whitespace-nowrap transition-colors">9:00 PM</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface hover:bg-surface-bright rounded-full font-bold whitespace-nowrap transition-colors">10:00 PM</button>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Guide Item 1 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-all duration-300 border border-white/5">
+<div class="w-full md:w-48 text-center md:text-left">
+<span class="text-primary font-black text-xl">20:00</span>
+<div class="text-zinc-500 font-bold uppercase text-xs tracking-widest mt-1">Channel 042</div>
+</div>
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Show thumbnail" class="w-full h-full object-cover" data-alt="close up of an eye reflecting a movie screen with cinematic motion blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAToDLqxrGo2DaZqzpYk7kPND1Kle7Yo-aiGnzA0qn1fghw6mos4dSQk6F6S9sVNZq9Nwwi-T52PKnLzbYE6y-8HUDbLfl7cUywBxxrJXZg1NL5WY1MrFZ0qOhC3zRkPq7veJ1MPiVUlS5RUlSbTke7fWR9PgH6nZpDWyXAa0dFtG8QPCFis_js9yZqAm6KgR9Ym_BRBeTvnkXDYZ580LSWdR4Te3juTuyRdIRM3lRgn5BHwnpHVnNK76J5Y0WEMTLgm5GA1bQQcTpm"/>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h4 class="font-headline font-bold text-2xl mb-1">Neon Horizons: Legacy</h4>
+<p class="text-on-surface/60 font-body text-sm line-clamp-2">S2 E04 • The team navigates the treacherous underworld of the digital grid to find the lost mainframe key.</p>
+</div>
+<button class="w-full md:w-auto px-6 py-3 rounded-full border border-primary text-primary font-bold group-hover:bg-primary group-hover:text-on-primary transition-all">
+                        Tune In
+                    </button>
+</div>
+<!-- Guide Item 2 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-all duration-300 border border-white/5">
+<div class="w-full md:w-48 text-center md:text-left">
+<span class="text-zinc-400 font-black text-xl">20:30</span>
+<div class="text-zinc-500 font-bold uppercase text-xs tracking-widest mt-1">Channel 015</div>
+</div>
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Show thumbnail" class="w-full h-full object-cover" data-alt="dark dramatic silhouette of a person standing in a doorway with bright light coming from behind" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Q2ppYs0_wqQFitBfSytJ9UFwbsLxYP3g3IkqVXrTkkPFJ3drWkU5hX5K8G2OoXgi3arQ2bFRaGOKHxx56YR-ONZHuNfYaRtUlWn-83E8HLRuS9OAja80IR5WEBz-xu1x4ginxpvaNUOTTVMFlMdf69b0DHsVEvcJjnWiQ-hrXiaZ9TfTXXKgeLtnQEW3rp2uenaJ2LhzbA1nJeVJ99k0U0jTsm37unPTwaRYMmdbfr4x3ZC4AvqdFP9hBXdI8O4gthC5o4BTQAWv"/>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h4 class="font-headline font-bold text-2xl mb-1">The Velvet Mystery</h4>
+<p class="text-on-surface/60 font-body text-sm line-clamp-2">Original Miniseries • A high-stakes heist takes an unexpected turn in the heart of Paris.</p>
+</div>
+<button class="w-full md:w-auto px-6 py-3 rounded-full border border-zinc-700 text-zinc-400 font-bold group-hover:bg-surface-bright group-hover:text-white transition-all">
+                        Remind Me
+                    </button>
+</div>
+<!-- Guide Item 3 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-all duration-300 border border-white/5">
+<div class="w-full md:w-48 text-center md:text-left">
+<span class="text-zinc-400 font-black text-xl">21:00</span>
+<div class="text-zinc-500 font-bold uppercase text-xs tracking-widest mt-1">Channel 088</div>
+</div>
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Show thumbnail" class="w-full h-full object-cover" data-alt="mysterious waterfall in a deep forest with ethereal mist and atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqcpXHyqQ10Iom32w5jTNA5mLkVZBWRy-qgWU4U-JtTXFSt-L663GxFkEHQ-5cdztacVyJh7FckxR7OKzELRVFT4GwOp9fjuB2_HSGotdI1YzM4NiC11ZAbV1tx4e6eIxp5S4Kb0Giyv_Ln_GUbt2z6FG3Psxz0AX52ezEq4tWPAh_t_t-2rgJ9HGHXqLDi-LljDIBubKkrD9kKjS2FruvCxocKgVI5DZKsqrY45eCx6D3x0ZM6KoglFTABCW5c9aUdyotAzo5S_8H"/>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h4 class="font-headline font-bold text-2xl mb-1">Earth Unseen</h4>
+<p class="text-on-surface/60 font-body text-sm line-clamp-2">Documentary Special • Journey to the most remote corners of the planet where nature remains untouched.</p>
+</div>
+<button class="w-full md:w-auto px-6 py-3 rounded-full border border-zinc-700 text-zinc-400 font-bold group-hover:bg-surface-bright group-hover:text-white transition-all">
+                        Remind Me
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="relative py-32 px-6 md:px-12 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-background z-0"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<h2 class="font-display font-black text-5xl md:text-7xl tracking-tighter mb-8">Ready to step into the Velvet Theater?</h2>
+<p class="font-body text-xl text-on-surface/80 mb-12 max-w-2xl mx-auto">
+                Join thousands of film enthusiasts experiencing content the way it was meant to be seen. Immersive, high-fidelity, and curated for you.
+            </p>
+<div class="flex flex-col md:flex-row justify-center gap-4">
+<button class="px-12 py-5 bg-primary-container text-on-primary-container rounded-full font-black text-xl transition-all duration-300 hover:scale-105 shadow-[0_20px_60px_rgba(229,9,20,0.4)]">
+                    Join Now — 7 Days Free
+                </button>
+<button class="px-12 py-5 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full font-black text-xl hover:bg-white/10 transition-all">
+                    Explore Plans
+                </button>
+</div>
+<p class="mt-8 text-zinc-500 font-medium text-sm">Cancel anytime. No hidden fees. Just pure cinema.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#131313] w-full pt-20 pb-10 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-10">
+<div class="flex flex-col items-center md:items-start">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#E50914] text-2xl">play_circle</span>
+<span class="text-xl font-bold text-zinc-100 uppercase tracking-tighter">LoopTV</span>
+</div>
+<p class="text-zinc-500 font-['Manrope'] text-sm font-medium tracking-wide text-center md:text-left max-w-xs">
+                    Redefining the television experience through immersive design and premium curation.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 md:gap-12">
+<a class="text-zinc-500 hover:text-[#E50914] transition-colors font-['Manrope'] text-sm font-medium tracking-wide" href="#">Privacy Policy</a>
+<a class="text-zinc-500 hover:text-[#E50914] transition-colors font-['Manrope'] text-sm font-medium tracking-wide" href="#">Terms of Service</a>
+<a class="text-zinc-500 hover:text-[#E50914] transition-colors font-['Manrope'] text-sm font-medium tracking-wide" href="#">Help Center</a>
+<a class="text-zinc-500 hover:text-[#E50914] transition-colors font-['Manrope'] text-sm font-medium tracking-wide" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-primary-container transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.599 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-primary-container transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 md:px-12 mt-10 text-center">
+<span class="text-zinc-600 text-xs font-medium tracking-widest uppercase">© 2024 LoopTV. All rights reserved. The Velvet Theater Experience.</span>
+</div>
+</footer>
+</body></html>
