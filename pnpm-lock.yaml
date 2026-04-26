@@ -19,55 +19,55 @@ importers:
         version: 19.2.5(react@19.2.5)
     devDependencies:
       '@opennextjs/cloudflare':
-        specifier: ^1.19.4
+        specifier: 1.19.4
         version: 1.19.4(next@16.2.4(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(wrangler@4.85.0)
       '@playwright/test':
-        specifier: ^1.59.1
+        specifier: 1.59.1
         version: 1.59.1
       '@saas-maker/eslint-config':
-        specifier: file:../saas-maker/packages/tooling/eslint-config
-        version: file:../saas-maker/packages/tooling/eslint-config(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)
+        specifier: ^1.0.2
+        version: 1.0.2(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)
       '@saas-maker/prettier-config':
-        specifier: file:../saas-maker/packages/tooling/prettier-config
-        version: file:../saas-maker/packages/tooling/prettier-config
+        specifier: ^1.0.0
+        version: 1.0.0
       '@saas-maker/tsconfig':
-        specifier: file:../saas-maker/packages/tooling/tsconfig
-        version: file:../saas-maker/packages/tooling/tsconfig
+        specifier: ^1.0.0
+        version: 1.0.0
       '@tailwindcss/postcss':
-        specifier: ^4.2.4
+        specifier: '4'
         version: 4.2.4
       '@types/node':
-        specifier: ^25.6.0
+        specifier: 25.6.0
         version: 25.6.0
       '@types/react':
-        specifier: ^19.2.14
+        specifier: '19'
         version: 19.2.14
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: '19'
         version: 19.2.3(@types/react@19.2.14)
       '@types/youtube':
-        specifier: ^0.2.0
+        specifier: 0.2.0
         version: 0.2.0
       '@vitejs/plugin-react':
-        specifier: ^6.0.1
+        specifier: 6.0.1
         version: 6.0.1(vite@8.0.3(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.16.9)(yaml@2.8.3))
       eslint:
-        specifier: ^10.2.1
+        specifier: 10.2.1
         version: 10.2.1(jiti@2.6.1)
       eslint-config-next:
         specifier: 16.2.4
         version: 16.2.4(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)
       tailwindcss:
-        specifier: ^4.2.4
+        specifier: '4'
         version: 4.2.4
       typescript:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
       vitest:
-        specifier: ^4.1.5
+        specifier: 4.1.5
         version: 4.1.5(@types/node@25.6.0)(vite@8.0.3(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.16.9)(yaml@2.8.3))
       wrangler:
-        specifier: ^4.85.0
+        specifier: 4.85.0
         version: 4.85.0
 
 packages:
@@ -1253,16 +1253,16 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@saas-maker/eslint-config@file:../saas-maker/packages/tooling/eslint-config':
-    resolution: {directory: ../saas-maker/packages/tooling/eslint-config, type: directory}
+  '@saas-maker/eslint-config@1.0.2':
+    resolution: {integrity: sha512-kHCz6sY8obhwVLUsVqTr1C7f++vMPwh3k4hTufwIBoai49FoYG3lOb6cNyGhapAtyOB3DgeBdDV3zE/PAxRYXw==}
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@saas-maker/prettier-config@file:../saas-maker/packages/tooling/prettier-config':
-    resolution: {directory: ../saas-maker/packages/tooling/prettier-config, type: directory}
+  '@saas-maker/prettier-config@1.0.0':
+    resolution: {integrity: sha512-SIEj/4cwEOGnWj6aQzvIQh+BuHZ3DWo4YVYtplgpCIgP9IW01h+x+8Lh648L9boRfGwBDsJq5D0oHly7Ckmjqg==}
 
-  '@saas-maker/tsconfig@file:../saas-maker/packages/tooling/tsconfig':
-    resolution: {directory: ../saas-maker/packages/tooling/tsconfig, type: directory}
+  '@saas-maker/tsconfig@1.0.0':
+    resolution: {integrity: sha512-23PwZHje/WL6cBOQlZJ3IFxQaWmHvs8FMBPshDCBdCEZLfpLMD7Jpga/D1z42eVpF2X6d9sz1MwdTV5hOE2X+w==}
 
   '@sindresorhus/is@7.2.0':
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
@@ -2301,12 +2301,6 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
-
-  eslint-plugin-react-hooks@5.2.0:
-    resolution: {integrity: sha512-+f15FfK64YQwZdJNELETdn5ibXEUQmW1DZL6KXhNnc2heoy/sg9VJJeT7n8TlMWouzWqSWavFkIhHyIbIAEapg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
   eslint-plugin-react-hooks@7.1.1:
     resolution: {integrity: sha512-f2I7Gw6JbvCexzIInuSbZpfdQ44D7iqdWX01FKLvrPgqxoE7oMj8clOfto8U6vYiz4yd5oKu39rRSVOe1zRu0g==}
@@ -5208,14 +5202,14 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@saas-maker/eslint-config@file:../saas-maker/packages/tooling/eslint-config(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)':
+  '@saas-maker/eslint-config@1.0.2(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)':
     dependencies:
       '@eslint/js': 9.39.4
       eslint: 10.2.1(jiti@2.6.1)
       eslint-config-prettier: 10.1.8(eslint@10.2.1(jiti@2.6.1))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint-import-resolver-typescript@3.10.1)(eslint@10.2.1(jiti@2.6.1))
       eslint-plugin-promise: 7.2.1(eslint@10.2.1(jiti@2.6.1))
-      eslint-plugin-react-hooks: 5.2.0(eslint@10.2.1(jiti@2.6.1))
+      eslint-plugin-react-hooks: 7.1.1(eslint@10.2.1(jiti@2.6.1))
       eslint-plugin-react-refresh: 0.4.26(eslint@10.2.1(jiti@2.6.1))
       eslint-plugin-simple-import-sort: 13.0.0(eslint@10.2.1(jiti@2.6.1))
       globals: 15.15.0
@@ -5227,9 +5221,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@saas-maker/prettier-config@file:../saas-maker/packages/tooling/prettier-config': {}
+  '@saas-maker/prettier-config@1.0.0': {}
 
-  '@saas-maker/tsconfig@file:../saas-maker/packages/tooling/tsconfig': {}
+  '@saas-maker/tsconfig@1.0.0': {}
 
   '@sindresorhus/is@7.2.0': {}
 
@@ -6506,10 +6500,6 @@ snapshots:
   eslint-plugin-promise@7.2.1(eslint@10.2.1(jiti@2.6.1)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.2.1(jiti@2.6.1))
-      eslint: 10.2.1(jiti@2.6.1)
-
-  eslint-plugin-react-hooks@5.2.0(eslint@10.2.1(jiti@2.6.1)):
-    dependencies:
       eslint: 10.2.1(jiti@2.6.1)
 
   eslint-plugin-react-hooks@7.1.1(eslint@10.2.1(jiti@2.6.1)):
