@@ -4,8 +4,6 @@ TV-like app that plays random YouTube videos from curated channels, nonstop. Pic
 
 **Zero API keys needed.** Uses yt-dlp for catalog building and YouTube's free IFrame Player for playback. HuggingFace NER auto-tags videos with people, places, and topics.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsarthakagrawal927%2Flooptv)
-
 > **Fork it, edit `stations.json` with your own YouTube channels, and deploy.** That's it.
 
 ## Stats
@@ -98,7 +96,7 @@ The catalog updates weekly via GitHub Actions (`.github/workflows/update-catalog
 
 ## Deployment
 
-Deployed on Vercel.
+Deployed on Cloudflare Workers via OpenNext: `looptv.sarthakagrawal927.workers.dev`.
 
 ## Stack
 

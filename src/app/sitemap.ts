@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import stations from "../../channels.config";
 
-const siteUrl = "https://looptv.vercel.app";
+const siteUrl = "https://looptv.sarthakagrawal927.workers.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const stationRoutes: MetadataRoute.Sitemap = stations.map((s) => ({

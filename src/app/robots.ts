@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://looptv.vercel.app/sitemap.xml",
+    sitemap: "https://looptv.sarthakagrawal927.workers.dev/sitemap.xml",
   };
 }

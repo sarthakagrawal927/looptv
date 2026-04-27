@@ -16,7 +16,7 @@ TV-like random YouTube player with 13 stations, 78 channels, and ~38K videos —
 - DB: None — static `public/catalog.json` served at runtime; watched history in localStorage
 - Auth: None
 - Testing: Vitest (unit)
-- Deploy: Vercel
+- Deploy: Cloudflare Workers (via OpenNext) — `looptv.sarthakagrawal927.workers.dev`
 - Package manager: pnpm
 
 ## Repo structure
