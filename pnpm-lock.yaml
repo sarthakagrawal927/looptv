@@ -8,6 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@saas-maker/changelog-widget':
+        specifier: ^0.2.1
+        version: 0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@saas-maker/feedback':
+        specifier: ^0.2.1
+        version: 0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@saas-maker/testimonials':
+        specifier: ^0.2.1
+        version: 0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       next:
         specifier: 16.2.4
         version: 16.2.4(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -1253,13 +1262,31 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
+  '@saas-maker/changelog-widget@0.2.1':
+    resolution: {integrity: sha512-tAQb6hr5mOzbyQxKUNWePlllsdNDquHW0G2FG7u9Um2BzgNNi8WF94M5Khz/SlvVoSYvKl1yMFX6sxnj07kynw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   '@saas-maker/eslint-config@1.0.2':
     resolution: {integrity: sha512-kHCz6sY8obhwVLUsVqTr1C7f++vMPwh3k4hTufwIBoai49FoYG3lOb6cNyGhapAtyOB3DgeBdDV3zE/PAxRYXw==}
     peerDependencies:
       eslint: '>=9.0.0'
 
+  '@saas-maker/feedback@0.2.1':
+    resolution: {integrity: sha512-ajtrH7t/hhzxrNzX2BU0i5nfGpXNu7w4EQCFBajsuFn255O29trRCu3VNL1NoQhWwypjEEdeaK4DqoEY4zd7rw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   '@saas-maker/prettier-config@1.0.0':
     resolution: {integrity: sha512-SIEj/4cwEOGnWj6aQzvIQh+BuHZ3DWo4YVYtplgpCIgP9IW01h+x+8Lh648L9boRfGwBDsJq5D0oHly7Ckmjqg==}
+
+  '@saas-maker/testimonials@0.2.1':
+    resolution: {integrity: sha512-mioGG90lztefuWFKCFPDyv8fmL0+Na2eniHlKuc2Ug35sahIgGqdWsjjTFsVIvuY59gaVyj+iJMV4KmVTeTwBA==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   '@saas-maker/tsconfig@1.0.0':
     resolution: {integrity: sha512-23PwZHje/WL6cBOQlZJ3IFxQaWmHvs8FMBPshDCBdCEZLfpLMD7Jpga/D1z42eVpF2X6d9sz1MwdTV5hOE2X+w==}
@@ -5202,6 +5229,11 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
+  '@saas-maker/changelog-widget@0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+    dependencies:
+      react: 19.2.5
+      react-dom: 19.2.5(react@19.2.5)
+
   '@saas-maker/eslint-config@1.0.2(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)':
     dependencies:
       '@eslint/js': 9.39.4
@@ -5221,7 +5253,17 @@ snapshots:
       - supports-color
       - typescript
 
+  '@saas-maker/feedback@0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+    dependencies:
+      react: 19.2.5
+      react-dom: 19.2.5(react@19.2.5)
+
   '@saas-maker/prettier-config@1.0.0': {}
+
+  '@saas-maker/testimonials@0.2.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+    dependencies:
+      react: 19.2.5
+      react-dom: 19.2.5(react@19.2.5)
 
   '@saas-maker/tsconfig@1.0.0': {}
 

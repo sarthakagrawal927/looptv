@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { SaaSMakerFeedback } from "@/components/saasmaker-feedback";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +47,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.variable}>
-      <body className="bg-black">{children}</body>
+      <body className="bg-black">
+        {children}
+        <SaaSMakerFeedback />
+      </body>
     </html>
   );
 }
