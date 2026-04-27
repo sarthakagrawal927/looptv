@@ -45,3 +45,7 @@ data/
 # CF/open-next build artifacts
 .open-next/
 .wrangler/
+
+# fallow cache
+.fallow/
+cache.bin
