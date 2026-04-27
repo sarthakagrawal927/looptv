@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { AnalyticsProvider } from "@/components/posthog-provider";
 import { SaaSMakerFeedback } from "@/components/saasmaker-feedback";
 
 const geistSans = Geist({
@@ -48,8 +49,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={geistSans.variable}>
       <body className="bg-black">
-        {children}
-        <SaaSMakerFeedback />
+        <AnalyticsProvider>
+          {children}
+          <SaaSMakerFeedback />
+        </AnalyticsProvider>
       </body>
     </html>
   );

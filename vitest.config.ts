@@ -1,20 +1,15 @@
-import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import path from 'path';
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
+import react from '@vitejs/plugin-react';
+import { defineVitestConfig } from '@saas-maker/test-config/vitest';
+
+export default defineVitestConfig({
+  extend: {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
   },
-  test: {
-    environment: "node",
-  },
-coverage: {
-    provider: 'v8',
-    reporter: ['json', 'text-summary'],
-    exclude: ['node_modules', 'dist', '.next', 'coverage', '**/*.d.ts', '**/*.config.*', '**/test/**'],
-  },,
 });

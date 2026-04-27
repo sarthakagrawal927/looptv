@@ -17,6 +17,7 @@
   "dependencies": {
     "@saas-maker/changelog-widget": "^0.2.1",
     "@saas-maker/feedback": "^0.2.1",
+    "@saas-maker/posthog-client": "^0.1.0",
     "@saas-maker/testimonials": "^0.2.1",
     "next": "16.2.4",
     "react": "19.2.5",
@@ -27,6 +28,7 @@
     "@playwright/test": "1.59.1",
     "@saas-maker/eslint-config": "^1.0.2",
     "@saas-maker/prettier-config": "^1.0.0",
+    "@saas-maker/test-config": "^0.1.0",
     "@saas-maker/tsconfig": "^1.0.0",
     "@tailwindcss/postcss": "4",
     "@types/node": "25.6.0",
