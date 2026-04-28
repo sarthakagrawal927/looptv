@@ -16,7 +16,7 @@ TV-like random YouTube player with 13 stations, 78 channels, and ~38K videos —
 - DB: None — static `public/catalog.json` served at runtime; watched history in localStorage
 - Auth: None
 - Testing: Vitest (unit)
-- Deploy: Cloudflare Workers (via OpenNext) — `looptv.sarthakagrawal927.workers.dev`
+- Deploy: Cloudflare Pages (static export, `output: 'export'`) — `looptv.pages.dev`; legacy Worker at `looptv.sarthakagrawal927.workers.dev` left intact
 - Package manager: pnpm
 
 ## Repo structure
