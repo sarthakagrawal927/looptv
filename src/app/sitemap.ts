@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import stations from "../../channels.config";
 
-const siteUrl = "https://looptv.sarthakagrawal927.workers.dev";
+export const dynamic = "force-static";
+
+const siteUrl = "https://looptv.pages.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const stationRoutes: MetadataRoute.Sitemap = stations.map((s) => ({

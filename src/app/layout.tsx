@@ -9,7 +9,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://looptv.sarthakagrawal927.workers.dev";
+const siteUrl = "https://looptv.pages.dev";
 
 export const metadata: Metadata = {
   title: {
