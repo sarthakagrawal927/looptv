@@ -96,7 +96,12 @@ The catalog updates weekly via GitHub Actions (`.github/workflows/update-catalog
 
 ## Deployment
 
-Deployed on Cloudflare Workers via OpenNext: `looptv.sarthakagrawal927.workers.dev`.
+Deployed on Cloudflare Pages as a static Next.js export: `looptv.pages.dev`.
+
+```bash
+pnpm build
+wrangler pages deploy out --project-name=looptv
+```
 
 ## Stack
 

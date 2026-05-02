@@ -11,8 +11,8 @@
     "build:catalog": "bash scripts/build-catalog.sh",
     "build:ner": "python3 scripts/extract-tags.py",
     "fetch:all": "bash scripts/fetch-all-sources.sh",
-    "cf:build": "opennextjs-cloudflare build",
-    "deploy": "pnpm cf:build && wrangler deploy"
+    "cf:build": "pnpm build",
+    "deploy": "pnpm cf:build && wrangler pages deploy out --project-name=looptv"
   },
   "dependencies": {
     "@saas-maker/changelog-widget": "^0.2.1",
@@ -24,7 +24,6 @@
     "react-dom": "19.2.5"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "1.19.4",
     "@playwright/test": "1.59.1",
     "@saas-maker/eslint-config": "^1.0.2",
     "@saas-maker/prettier-config": "^1.0.0",

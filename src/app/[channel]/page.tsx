@@ -3,6 +3,8 @@ import TVApp from "@/components/TVApp";
 import stations from "../../../channels.config";
 import { notFound } from "next/navigation";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return stations.map((s) => ({ channel: s.id }));
 }
