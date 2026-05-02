@@ -2,8 +2,44 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'channels.config.ts'
+      - 'next.config.ts'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'postcss.config.mjs'
+      - 'requirements-ner.txt'
+      - 'stations.json'
+      - 'tailwind.config.*'
+      - 'tsconfig.json'
+      - 'vitest.config.ts'
+      - 'wrangler.toml'
   pull_request:
     branches: [main]
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'channels.config.ts'
+      - 'next.config.ts'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'postcss.config.mjs'
+      - 'requirements-ner.txt'
+      - 'stations.json'
+      - 'tailwind.config.*'
+      - 'tsconfig.json'
+      - 'vitest.config.ts'
+      - 'wrangler.toml'
 
 jobs:
   deploy-production:
@@ -24,6 +60,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: pages deploy out --project-name=looptv --branch=main --commit-dirty=true
+      - name: Smoke production
+        run: curl --fail --silent --show-error --location --output /dev/null --retry 3 --retry-delay 5 https://looptv.pages.dev
 
   deploy-preview:
     if: github.event_name == 'pull_request'
