@@ -10,6 +10,8 @@
   "project": ["**/*.{astro,ts,tsx,js,jsx,mjs,cjs,mts}"],
   "ignore": [
     // Optional docs presentation config and the runtime-copied yt-dlp boundary.
+    // Static asset loaded via a raw <script src> tag (BaseLayout.astro), not an import.
+    "public/app-health-log.js"
   ],
   "ignoreDependencies": [
     // CSS-only dependency and the checker-spawned CLI are not visible in the import graph.
