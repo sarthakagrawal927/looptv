@@ -74,6 +74,5 @@ history, playlists, and preferences remain in browser storage.
 
 - [Open this page](https://tv.significanthobbies.com${props.surface.path})
 - [Browse stations](https://tv.significanthobbies.com/channels)
-- [View the source](https://github.com/Significant-Hobbies/looptv)
 `;
 }
