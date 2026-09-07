@@ -9,3 +9,4 @@ description: Local setup, catalog rebuild, adding stations, testing, linting.
 - [catalog-rebuild.md](catalog-rebuild.md) — local and manual catalog rebuild.
 - [adding-station.md](adding-station.md) — add a station by editing `stations.json`.
 - [testing.md](testing.md) — test layout, commands, conventions, Biome.
+- [hosted-playback-qualification.md](hosted-playback-qualification.md) — deployed station acceptance and its limits.

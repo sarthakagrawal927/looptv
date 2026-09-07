@@ -1,6 +1,6 @@
 # LoopTV — PROJECT STATUS
 
-Last updated: 2026-08-31
+Last updated: 2026-09-07
 
 > Detailed feature inventory and timeline live in
 > [docs/product/features.md](docs/product/features.md).
@@ -21,6 +21,8 @@ catalog freshness, and documentation hygiene.
   it does not affect the static runtime.
 
 ## Timeline
+
+- **2026-09-07:** Deployed station layout/startup fixes passed [hosted desktop/mobile playback acceptance](docs/development/hosted-playback-qualification.md); issue #51 is complete. Preserve inactive/done scope.
 
 - **2026-08-31:** Added source-ready product-owned Microsoft Clarity tracking
   and updated the privacy surface to disclose both analytics services. No

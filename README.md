@@ -23,10 +23,12 @@ open/close. A fresh desktop public video after immediate Next showed a matching
 iframe/control title and advancing playback; [screenshot](docs/development/2026-09-07-station-playback.png).
 This is a representative local check, not qualification of all upstream videos.
 
-[Issue #51](https://github.com/Significant-Hobbies/looptv/issues/51) retains approved
-deployment and hosted desktop/mobile playback checks. No deployment, catalog
-refresh, model calls or provider changes were performed. One open issue, zero
-open PRs and no closures; the completed product remains inactive.
+The repair was deployed through [Actions 34125220328](https://github.com/Significant-Hobbies/looptv/actions/runs/34125220328) and passed hosted desktop/mobile acceptance.
+See the [hosted receipt](docs/development/hosted-playback-qualification.md) for actual
+YouTube playback, ready/startup Next, search, controls and separately controlled
+embed-error checks. [Issue #51](https://github.com/Significant-Hobbies/looptv/issues/51)
+is complete. The product remains inactive; catalog-wide availability, long-session
+playback and physical-device behavior are outside this representative check.
 
 ## Deployment & External Services
 
