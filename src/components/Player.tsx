@@ -157,10 +157,11 @@ interface PlayerRefs {
 }
 
 function buildPlayerOptions(refs: PlayerRefs) {
+  const initialVideoId = refs.currentVideoRef.current;
   return {
     width: '100%',
     height: '100%',
-    videoId: refs.currentVideoRef.current,
+    videoId: initialVideoId,
     playerVars: {
       autoplay: 1,
       controls: 1,
@@ -171,7 +172,13 @@ function buildPlayerOptions(refs: PlayerRefs) {
       playsinline: 1,
     },
     events: {
-      onReady: () => refs.onReadyRef.current(),
+      onReady: (event: YT.PlayerEvent) => {
+        // Selection can change before the iframe exposes loadVideoById.
+        if (refs.currentVideoRef.current !== initialVideoId) {
+          event.target.loadVideoById(refs.currentVideoRef.current);
+        }
+        refs.onReadyRef.current();
+      },
       onStateChange: (e: YT.OnStateChangeEvent) => {
         switch (e.data) {
           case window.YT.PlayerState.ENDED:

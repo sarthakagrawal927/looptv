@@ -9,6 +9,25 @@ TV-like app that plays random YouTube videos from curated channels, nonstop. Pic
 
 > **Fork it, edit `stations.json` with your own YouTube channels, and deploy.** That's it.
 
+## Playback qualification — 2026-09-07
+
+Station pages now omit the portfolio strip so it cannot cover the full-viewport
+player. Browsing pages retain it. Next pressed while the YouTube iframe starts
+now loads the latest selection once ready, keeping the video and title aligned.
+The delayed-player [browser regression](tests/player-loading.spec.ts) reproduces
+the old failure and passes with the fix.
+
+`pnpm quality` passes (233 tests). Built-browser checks at 1280×800, 390×844 and
+844×390 found no horizontal overflow, all controls in bounds and working search
+open/close. A fresh desktop public video after immediate Next showed a matching
+iframe/control title and advancing playback; [screenshot](docs/development/2026-09-07-station-playback.png).
+This is a representative local check, not qualification of all upstream videos.
+
+[Issue #51](https://github.com/Significant-Hobbies/looptv/issues/51) retains approved
+deployment and hosted desktop/mobile playback checks. No deployment, catalog
+refresh, model calls or provider changes were performed. One open issue, zero
+open PRs and no closures; the completed product remains inactive.
+
 ## Deployment & External Services
 
 | Concern | Service |

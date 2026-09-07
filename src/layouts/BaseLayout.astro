@@ -7,12 +7,14 @@ interface Props {
   title?: string;
   description?: string;
   canonicalPath?: string;
+  showProjectStrip?: boolean;
 }
 
 const {
   title = 'LoopTV',
   description = 'Pick a station. Random clips from curated YouTube channels play nonstop. No account, no algorithm.',
   canonicalPath = '/',
+  showProjectStrip = true,
 } = Astro.props;
 const siteUrl = PUBLIC_ORIGIN;
 const canonical = canonicalPublicUrl(canonicalPath);
@@ -87,12 +89,14 @@ const jsonLd = {
   <body class="bg-black">
     <slot />
     <ClientServices client:idle />
-    <script
-      is:inline
-      src="https://sassmaker.com/project-strip.js"
-      data-project="looptv"
-      defer
-    ></script>
+    {showProjectStrip && (
+      <script
+        is:inline
+        src="https://sassmaker.com/project-strip.js"
+        data-project="looptv"
+        defer
+      ></script>
+    )}
     <script
       is:inline
       src="https://sassmaker.com/ai-chat-footer.js"
